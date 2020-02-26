@@ -23,11 +23,7 @@ class CreatePacientesTable extends Migration
             $table->string('telefono')->nullable();
             $table->enum('sexo', ['Masculino', 'Femenino', 'Otro'])->nullable();
             $table->date('fecha_nacimiento');
-            $table->bigIncrements('ficha_id')->nullable();
-
-
-
-
+            $table->bigIncrements('presupuesto_id')->nullable();
 
             $table->timestamps();
         });
