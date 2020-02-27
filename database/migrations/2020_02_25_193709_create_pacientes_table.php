@@ -20,11 +20,11 @@ class CreatePacientesTable extends Migration
             $table->string('apellido_paterno');
             $table->string('apellido_materno')->nullable();
             $table->string('direccion')->nullable();
+            $table->string('comuna')->nullable();
             $table->string('telefono')->nullable();
             $table->enum('sexo', ['Masculino', 'Femenino', 'Otro'])->nullable();
             $table->date('fecha_nacimiento');
-            $table->bigIncrements('presupuesto_id')->nullable();
-
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }
