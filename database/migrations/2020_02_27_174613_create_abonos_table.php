@@ -22,7 +22,7 @@ class CreateAbonosTable extends Migration
             $table->unsignedBigInteger('medio_id')->nullable();
         });
 
-        Schema::table('presupuestos', function (Blueprint $table) {
+        Schema::table('abonos', function (Blueprint $table) {
             $table->foreign('medio_id')->references('id')->on('medios')->onUpdate('cascade')->onDelete('set null');
         });
     }

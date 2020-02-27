@@ -16,7 +16,7 @@ class PrestacionPresupuestoTable extends Migration
         Schema::create('prestacion_presupuesto', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('prestacion_id')->nullable();
-            $table->unsignedInteger('presupuesto_id')->nullable();
+            $table->unsignedBigInteger('presupuesto_id')->nullable();
             $table->timestamps();
         });
 
