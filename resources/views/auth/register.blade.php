@@ -12,6 +12,20 @@
                         @csrf
 
                         <div class="form-group row">
+                            <label for="rut" class="col-md-4 col-form-label text-md-right">{{ __('Rut') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="rut" type="text" placeholder="16888999-k" class="form-control{{ $errors->has('rut') ? ' is-invalid' : '' }}" name="rut" value="{{ old('rut') }}" required>
+
+                                @if ($errors->has('rut'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('rut') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
@@ -22,6 +36,34 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="apellido_paterno" class="col-md-4 col-form-label text-md-right">{{ __('Apellido Paterno') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="apellido_paterno" type="text" class="form-control{{ $errors->has('apellido_paterno') ? ' is-invalid' : '' }}" name="apellido_paterno" value="{{ old('apellido_paterno') }}" required autofocus>
+
+                                @if ($errors->has('apellido_paterno'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('apellido_paterno') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="apellido_materno" class="col-md-4 col-form-label text-md-right">{{ __('Apellido Materno') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="apellido_materno" type="text" class="form-control{{ $errors->has('apellido_materno') ? ' is-invalid' : '' }}" name="apellido_materno" value="{{ old('apellido_materno') }}" required autofocus>
+
+                                @if ($errors->has('apellido_materno'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('apellido_materno') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
