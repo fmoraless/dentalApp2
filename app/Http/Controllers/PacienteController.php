@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\paciente;
+use App\Paciente;
 use Illuminate\Http\Request;
 
 class PacienteController extends Controller
@@ -12,9 +12,15 @@ class PacienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $name = $request->get('name');
+        $pacientes = Paciente::latest('created_at')
+            ->nombres('name')
+            ->where('activo')
+            ->paginate(10);
+
+            return view('paciente.index', compact('pacinetes'))
     }
 
     /**
@@ -24,7 +30,8 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        //
+        $paciente = new Paciente;
+        return view('paciente.create', compact('paciente'));
     }
 
     /**
@@ -35,7 +42,7 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

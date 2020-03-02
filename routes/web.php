@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/perfil', 'UserController@perfil')->name('perfil');
 Route::post('/perfil', 'UserController@updateAvatar');
 
+Route::resource('paciente', 'PacienteController');
 
 Auth::routes();
 
