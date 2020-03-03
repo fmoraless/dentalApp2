@@ -17,11 +17,13 @@ class PacienteController extends Controller
         $nombres = $request->get('nombres');
         $apellido_paterno = $request->get('apellido_paterno');
         $apellido_materno = $request->get('apellido_materno');
+        $rut = $request->get('rut');
 
         $pacientes = Paciente::latest('created_at')
             ->nombre($nombres)
             ->apellidopaterno($apellido_paterno)
             ->apellidomaterno($apellido_materno)
+            ->rut($rut)
             ->where('activo')
             ->paginate(10);
 
@@ -47,7 +49,6 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-
     }
 
     /**

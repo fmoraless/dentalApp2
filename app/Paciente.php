@@ -18,6 +18,12 @@ class Paciente extends Model
         return $this->hasMany(Image::class);
     }
 
+    public function scopeRut($query, $rut)
+    {
+        if ($rut)
+            return $query->where('rut', 'LIKE', "%$rut%");
+    }
+
     public function scopeNombre($query, $nombres)
     {
         if ($nombres)
