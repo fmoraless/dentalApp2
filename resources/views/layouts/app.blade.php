@@ -11,7 +11,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/app.js') }}"></script>
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -37,7 +37,9 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-
+                            <a class="navbar-item" href="{{ route('paciente.index') }}">
+                                Pacientes
+                            </a>
                         </ul>
 
                         <!-- Right Side Of Navbar -->
@@ -78,7 +80,7 @@
                 </div>
             </nav>
 
-            <main class="py-4">
+            <main class="container-fluid py-4">
                 @yield('content')
             </main>
         </div>

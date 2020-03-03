@@ -14,13 +14,18 @@ class PacienteController extends Controller
      */
     public function index(Request $request)
     {
-        $name = $request->get('name');
+        $nombres = $request->get('nombres');
+        $apellido_paterno = $request->get('apellido_paterno');
+        $apellido_materno = $request->get('apellido_materno');
+
         $pacientes = Paciente::latest('created_at')
-            ->nombres('name')
+            ->nombre($nombres)
+            ->apellidopaterno($apellido_paterno)
+            ->apellidomaterno($apellido_materno)
             ->where('activo')
             ->paginate(10);
 
-            return view('paciente.index', compact('pacinetes'))
+        return view('paciente.index', compact('pacientes'));
     }
 
     /**
@@ -37,7 +42,7 @@ class PacienteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -48,7 +53,7 @@ class PacienteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\paciente  $paciente
+     * @param \App\paciente $paciente
      * @return \Illuminate\Http\Response
      */
     public function show(paciente $paciente)
@@ -59,7 +64,7 @@ class PacienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\paciente  $paciente
+     * @param \App\paciente $paciente
      * @return \Illuminate\Http\Response
      */
     public function edit(paciente $paciente)
@@ -70,8 +75,8 @@ class PacienteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\paciente  $paciente
+     * @param \Illuminate\Http\Request $request
+     * @param \App\paciente $paciente
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, paciente $paciente)
@@ -82,7 +87,7 @@ class PacienteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\paciente  $paciente
+     * @param \App\paciente $paciente
      * @return \Illuminate\Http\Response
      */
     public function destroy(paciente $paciente)

@@ -7,13 +7,13 @@
                 {!! Form::open(['route' => 'paciente.index', 'method' => 'GET', 'class' => 'form-inline float-right'])
                 !!}
                 <div class="form-group mx-1">
-                    {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nonmbres']) }}
+                    {{ Form::text('nombres', null, ['class' => 'form-control', 'placeholder' => 'Nombres']) }}
                 </div>
                 <div class="form-group mx-1">
-                    {{ Form::text('cuerpo_paciente', null, ['class' => 'form-control', 'placeholder' => 'Cuerpo reunión']) }}
+                    {{ Form::text('apellido_paterno', null, ['class' => 'form-control', 'placeholder' => 'Apellido Paterno']) }}
                 </div>
                 <div class="form-group mx-1">
-                    {{ Form::date('dia_paciente', null, ['class' => 'form-control']) }}
+                    {{ Form::text('apellido_materno', null, ['class' => 'form-control', 'placeholder' => 'Apellido Materno']) }}
                 </div>
                 <div class="form-group mx-1">
                     <button type="submit" class="btn btn-secondary form-control"><span><i
@@ -42,10 +42,10 @@
         <table class="table table-hover table-sm-responsive table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th>Dia</th>
-                    <th>Hora Inicio</th>
-                    <th>Hora Fin</th>
-                    <th>Titulo Reunión</th>
+                    <th>Rut</th>
+                    <th>Nombres</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
                     <th colspan="2" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -54,10 +54,10 @@
                 @foreach($pacientes as $paciente)
 
                 <tr>
-                    <td>{{ Carbon\Carbon::parse($paciente->dia_paciente)->format("d-m-Y") }}</td>
-                    <td>{{ Carbon\Carbon::parse($paciente->inicio_paciente)->format("H:i") }}</td>
-                    <td>{{ Carbon\Carbon::parse($paciente->fin_paciente)->format("H:i") }}</td>
-                    <td>{{ $paciente->titulo_paciente }}</td>
+                    <td>{{ $paciente->rut }}</td>
+                    <td>{{ $paciente->nombres }}</td>
+                    <td>{{ $paciente->apellido_paterno }}</td>
+                    <td>{{ $paciente->apellido_materno }}</td>
 
                     <td><a class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom"
                             title="Detalle Pdf" href="{{ url('paciente/'.$paciente->id) }}" target="_blank"><i
@@ -78,7 +78,7 @@
 
         </div>
         <div>
-            {{ $paciente->links() }}
+            {{ $pacientes->links() }}
         </div>
     </div>
 </div>
