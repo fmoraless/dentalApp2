@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Paciente extends Model
 {
-    protected $fillable = [];
+    protected $fillable = ['rut', 'nombres', 'apellido_paterno', 'apellido_materno', 'fecha_nacimiento'];
 
     public function presupuestos()
     {
@@ -18,25 +18,12 @@ class Paciente extends Model
         return $this->hasMany(Image::class);
     }
 
-    public function scopeRut($query, $rut)
+    public function scopeSearch($query, $q)
     {
-        if ($rut)
-            return $query->where('rut', 'LIKE', "%$rut%");
-    }
-
-    public function scopeNombre($query, $nombres)
-    {
-        if ($nombres)
-            return $query->where('nombres', 'LIKE', "%$nombres%");
-    }
-    public function scopeApellidoPaterno($query, $apellido_pat)
-    {
-        if ($apellido_pat)
-            return $query->where('apellido_paterno', 'LIKE', "%$apellido_pat%");
-    }
-    public function scopeApellidoMaterno($query, $apellido_mat)
-    {
-        if ($apellido_mat)
-            return $query->where('apellido_materno', 'LIKE', "%$apellido_mat%");
+        if ($q)
+            return $query->where('rut', 'LIKE', "%$q%")
+                         ->orWhere('nombres', 'LIKE', "%$q%")
+                         ->orWhere('apellido_paterno', 'LIKE', "%$q%")
+                         ->orWhere('apellido_materno', 'LIKE', "%$q%");
     }
 }
