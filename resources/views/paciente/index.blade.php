@@ -26,8 +26,8 @@
                 </h2>
             </div>
         </div>
-        <div class="col-sx-12 col-md-12">
-            <table class="table table-hover table-sm-responsive table-striped">
+        <div class="col-md-12">
+            <table class="table table-hover table-md-responsive table-striped">
                 <thead class="thead-dark">
                 <tr>
                     <th>Rut</th>
@@ -61,7 +61,7 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
                 Nuevo
             </button>
-            <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
+            <div class="modal fade col-md-12" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -72,7 +72,15 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            ...
+			{{ Form::open() }}
+{!! Form::text('nombres', null, ['class' => 'form-control', 'placeholder' => 'Ingrese Nombres', 'autofocus'=> 'autofocus']) !!}
+<div class="row form-group">
+<div class="col">
+{!! Form::text('apellido_paterno',null, ['class' => 'form-control', 'placeholder' => 'Apellido Paterno']) !!}
+</div>
+<div class="col">                                                 {!! Form::text('apellido_materno',null, ['class' => 'form-control', 'placeholder' => 'Apellido Materno']) !!}                                                            </div>
+</div>
+{{ Form::close() }}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
