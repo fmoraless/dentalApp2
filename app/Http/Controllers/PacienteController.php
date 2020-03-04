@@ -30,8 +30,6 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        $paciente = new Paciente;
-        return view('paciente.create', compact('paciente'));
     }
 
     /**
@@ -42,6 +40,9 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
+        $paciente = new Paciente($request->except('_token'));
+
+        return redirect()->route('paciente.index')->with('success', 'Nuevo Paciente ha sido creado con exito');
     }
 
     /**
