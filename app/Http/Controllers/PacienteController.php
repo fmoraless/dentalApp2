@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePaciente;
 use App\Paciente;
 use Illuminate\Http\Request;
 
@@ -38,9 +39,10 @@ class PacienteController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePaciente $request)
     {
         $paciente = new Paciente($request->except('_token'));
+        $paciente->save();
 
         return redirect()->route('paciente.index')->with('success', 'Nuevo Paciente ha sido creado con exito');
     }
