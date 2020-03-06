@@ -37,13 +37,12 @@
                     <td>{{ $paciente->apellido_paterno }}</td>
                     <td>{{ $paciente->apellido_materno }}</td>
 
-                    <td><a class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                            title="Detalle Pdf" href="{{ url('paciente/'.$paciente->id) }}" target="_blank"><i
-                                class="fas fa-file-pdf"></i></a></td>
-
-                    <td><a class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                            title="Editar" href="{{ url('paciente/'.$paciente->id.'/edit') }}"><i
-                                class="fas fa-pen"></i></a></td>
+                    <td><a class="btn btn-outline-secondary btn-sm" data-formrut="{{ $paciente->rut }}"
+                            data-formnombres="{{ $paciente->nombres }}"
+                            data-formapellidopaterno="{{ $paciente->apellido_paterno }}"
+                            data-formapellidomaterno="{{ $paciente->apellido_materno }}"
+                            data-formfechanacimiento="{{ $paciente->fecha_nacimiento }}" data-toggle="modal"
+                            data-target="#editModal" title="Editar" href="#"><i class="fas fa-pen"></i></a></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -52,7 +51,8 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
             Nuevo
         </button>
-        @include('paciente.modal')
+        @include('paciente.create')
+        @include('paciente.edit')
     </div>
 </div>
 @stop
