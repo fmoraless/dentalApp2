@@ -19,7 +19,8 @@ class PacienteController extends Controller
 
         $pacientes = Paciente::latest()
             ->search($q)
-            ->paginate(3);
+            ->where('activo', '=', 1)
+            ->paginate(7);
 
         return view('paciente.index', compact('pacientes', 'q'));
     }
@@ -50,12 +51,13 @@ class PacienteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\paciente $paciente
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(paciente $paciente)
+    public function show(paciente $id)
     {
-        //
+        $paciente = Paciente::findOrFail($id);
+        return view('paciente.show', compact('paciente'));
     }
 
     /**
@@ -76,9 +78,13 @@ class PacienteController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        dd($request->all);
+        $paciente = Paciente::findOrFail($request->pcte_id);
+
+        $paciente->update($request->all());
+
+        return redirect()->route('paciente.index')->with('success', 'Cambios relizados');
     }
 
     /**
