@@ -66,7 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="uploads/avatars/{{ Auth()->user()->avatar }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                            <img src="uploads/avatars/{{ Auth()->user()->avatar ?? 'uploads/avatars/default.png' }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     Brad Diesel
@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="uploads/avatars/{{ Auth()->user()->avatar }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                            <img src="uploads/avatars/{{ Auth()->user()->avatar ?? 'uploads/avatars/default.png'}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     John Pierce
@@ -98,7 +98,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="uploads/avatars/{{ Auth()->user()->avatar }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                            <img src="uploads/avatars/{{ Auth()->user()->avatar ?? 'uploads/avatars/default.png'}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     Nora Silvester
@@ -163,7 +163,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="uploads/avatars/{{ Auth()->user()->avatar }}" class="img-circle elevation-2" alt="User Image">
+                    <img src="uploads/avatars/{{ Auth()->user()->avatar ?? 'uploads/avatars/default.png'}}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">{{ Auth()->user()->name }}</a>

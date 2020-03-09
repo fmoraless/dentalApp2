@@ -9,9 +9,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                {!! Form::label('rut', 'Rut') !!}
-                {{ Form::open(['action' => 'PacienteController@store', 'method' => 'POST']) }}
+                {{ Form::open(['action' => 'PacienteController@store', 'method' => 'POST', 'id' => 'formCreate']) }}
                 <div class="form-group">
+                    {!! Form::label('rut', 'Rut') !!}
                     {!! Form::text('rut', null, ['class' => 'form-control'.($errors->has('rut') ? ' is-invalid' : ''), 'placeholder' => '00000000-X', 'id' => 'rut'
                     ]) !!}
                     @if ($errors->has('rut'))
@@ -58,17 +58,18 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $('#createModal').on('shown.bs.modal', function () {
+<script src="{{ asset('js/paciente.js') }}"></script>
+{{--<script type="text/javascript">
+    --}}{{--$('#createModal').on('shown.bs.modal', function () {
         $('#rut').trigger('focus')
     });
-    @error ('rut')
+    @error('rut')
     $('#createModal').modal('show');
     @enderror
-    @error ('nombres')
+    @error('nombres')
     $('#createModal').modal('show');
     @enderror
-    @error ('apellido_paterno')
+    @error('apellido_paterno')
     $('#createModal').modal('show');
     @enderror
-</script>
+</script>--}}
