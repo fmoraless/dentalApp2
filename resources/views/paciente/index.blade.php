@@ -1,6 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.master')
 @section('content')
-    <div class="row">
         <div class="col-md-12">
 
             @if(session()->has('success'))
@@ -63,7 +62,6 @@
             @include('paciente.create')
             @include('paciente.edit')
         </div>
-    </div>
     <script>
         $(document).ready(function () {
             $('#alert').delay(2000).slideUp(200, function () {
