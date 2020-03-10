@@ -19,6 +19,9 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('paciente', 'PacienteController');
+    Route::resource('presupuesto', 'PresupuestoController');
+    Route::resource('prestacion', 'PrestacionController');
+
     Route::get('/perfil', 'UserController@perfil')->name('perfil');
     Route::post('/perfil', 'UserController@updateAvatar');
 });

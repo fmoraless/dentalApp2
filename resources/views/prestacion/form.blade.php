@@ -1,12 +1,12 @@
-{{ Form::open(['action' => 'PacienteController@store', 'method' => 'POST', 'class' => 'form-horizontal']) }}
+{{ Form::open(['action' => 'PrestacionController@store', 'method' => 'POST', 'class' => 'form-horizontal']) }}
 <div class="form-group row">
-    {!! Form::label('rut', 'Rut', ['class' => 'col-sm-2 col-form-label']) !!}
+    {!! Form::label('presta_nombre', 'Nombre', ['class' => 'col-sm-2 col-form-label']) !!}
     <div class="col-sm-6">
-        {!! Form::text('rut', null, ['class' => 'form-control form-control-sm'.($errors->has('rut') ? ' is-invalid' : ''), 'placeholder' =>
-        '00000000-X']) !!}
-        @if ($errors->has('rut'))
+        {!! Form::text('presta_nombre', null, ['class' => 'form-control form-control-sm'.($errors->has('presta_nombre') ? ' is-invalid' : ''), 'placeholder' =>
+        'indique nombre prestación']) !!}
+        @if ($errors->has('presta_nombre'))
             <span class="invalid-feedback">
-               <strong>{{ $errors->first('rut') }}</strong>
+               <strong>{{ $errors->first('presta_nombre') }}</strong>
             </span>
         @endif
     </div>
@@ -52,7 +52,7 @@
         {!! Form::date('fecha_nacimiento',null, ['class' => 'form-control form-control-sm']) !!}
     </div>
     <div class="col-sm-5">
-        {!! Form::select('sexo', ['Femenino' => 'femenino', 'Masculino' => 'masculino', 'Otro' => 'otro'], null, ['class' => 'form-control form-control sm', 'placeholder' => 'Seleccione Sexo']) !!}
+        {!! Form::select('sexo', ['Femenino' => 'Femenino', 'Masculino' => 'Masculino', 'Otro' => 'otro'], null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Seleccione Sexo']) !!}
     </div>
 </div>
 <hr>

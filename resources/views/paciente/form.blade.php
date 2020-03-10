@@ -52,7 +52,7 @@
         {!! Form::date('fecha_nacimiento',null, ['class' => 'form-control form-control-sm']) !!}
     </div>
     <div class="col-sm-5">
-        {!! Form::select('sexo', ['Femenino' => 'femenino', 'Masculino' => 'masculino', 'Otro' => 'otro'], null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Seleccione Sexo']) !!}
+        {!! Form::select('sexo', ['Femenino' => 'Femenino', 'Masculino' => 'Masculino', 'Otro' => 'otro'], null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Seleccione Sexo']) !!}
     </div>
 </div>
 <hr>

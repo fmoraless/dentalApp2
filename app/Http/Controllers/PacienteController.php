@@ -20,7 +20,7 @@ class PacienteController extends Controller
         $pacientes = Paciente::latest()
             ->search($q)
             ->where('activo', '=', 1)
-            ->paginate(5);
+            ->paginate(7);
 
         return view('paciente.index', compact('pacientes', 'q'));
     }
@@ -67,7 +67,7 @@ class PacienteController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(paciente $id)
+    public function edit($id)
     {
         $paciente = Paciente::findOrFail($id);
         return view('paciente.edit', compact('paciente'));

@@ -12,9 +12,14 @@ class PrestacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $q = $request->get('q');
+
+        $prestaciones = Prestacion::latest()
+            ->search($q)
+            ->paginate(7);
+        return view('prestacion.index', compact('prestaciones', 'q'));
     }
 
     /**
@@ -30,7 +35,7 @@ class PrestacionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +46,7 @@ class PrestacionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Prestacion  $prestacion
+     * @param  \App\Prestacion $prestacion
      * @return \Illuminate\Http\Response
      */
     public function show(Prestacion $prestacion)
@@ -52,7 +57,7 @@ class PrestacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Prestacion  $prestacion
+     * @param  \App\Prestacion $prestacion
      * @return \Illuminate\Http\Response
      */
     public function edit(Prestacion $prestacion)
@@ -63,8 +68,8 @@ class PrestacionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Prestacion  $prestacion
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Prestacion $prestacion
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Prestacion $prestacion)
@@ -75,7 +80,7 @@ class PrestacionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Prestacion  $prestacion
+     * @param  \App\Prestacion $prestacion
      * @return \Illuminate\Http\Response
      */
     public function destroy(Prestacion $prestacion)

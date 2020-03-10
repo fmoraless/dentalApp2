@@ -2,17 +2,15 @@
 @section('content')
     <div class="col-md-12">
 
-{{--        success alert al crear--}}
+        {{--        success alert al crear--}}
 
         <div class="page-header">
             <div class="form-group">
                 {!! Form::open(['route' => 'paciente.index', 'method' => 'GET', 'class' => 'form-inline float-right pb-2'])
                 !!}
-
                 {{ Form::text('q', null, ['class' => 'form-control mx-1', 'placeholder' => 'Buscar'], isset($q) ? $q : '') }}
-
                 <button type="submit" class="btn btn-secondary form-control"><span><i
-                            class="fas fa-search"></i></span></button>
+                                class="fas fa-search"></i></span></button>
                 {!! Form::close() !!}
             </div>
         </div>
@@ -41,20 +39,19 @@
             @foreach($pacientes as $paciente)
 
                 <tr>
-                    <td>{{ $paciente->rut }}</td>
+                    <td><a href="{{ route('paciente.show', $paciente->id) }}">{{ $paciente->rut }}</a></td>
                     <td>{{ $paciente->nombres }}</td>
                     <td>{{ $paciente->apellido_paterno }}</td>
                     <td>{{ $paciente->apellido_materno }}</td>
 
                     <td>
-                        <a class="btn btn-outline-secondary btn-sm"
-                           title="Editar" href="{{ route('paciente.edit', $paciente->id) }}"><i
-                                class="fas fa-pen"></i></a></td>
+                        <a class="btn bg-gradient-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                           title="Editar"
+                           href="{{ route('paciente.edit', $paciente->id) }}"><i class="fas fa-pen"></i></a></td>
                 </tr>
             @endforeach
             </tbody>
         </table>
         {{ $pacientes->appends(['q' => $q])->links() }}
-
     </div>
 @stop

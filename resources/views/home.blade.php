@@ -13,8 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    @include('_under-construction-page')
                 </div>
             </div>
         </div>
