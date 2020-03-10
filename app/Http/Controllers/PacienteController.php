@@ -20,7 +20,7 @@ class PacienteController extends Controller
         $pacientes = Paciente::latest()
             ->search($q)
             ->where('activo', '=', 1)
-            ->paginate(7);
+            ->paginate(5);
 
         return view('paciente.index', compact('pacientes', 'q'));
     }
@@ -32,6 +32,7 @@ class PacienteController extends Controller
      */
     public function create()
     {
+        return view('paciente.create');
     }
 
     /**
@@ -63,12 +64,13 @@ class PacienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\paciente $paciente
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(paciente $paciente)
+    public function edit(paciente $id)
     {
-        //
+        $paciente = Paciente::findOrFail($id);
+        return view('paciente.edit', compact('paciente'));
     }
 
     /**
@@ -78,9 +80,9 @@ class PacienteController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $paciente = Paciente::findOrFail($request->pcte_id);
+        $paciente = Paciente::findOrFail($id);
 
         $paciente->update($request->all());
 

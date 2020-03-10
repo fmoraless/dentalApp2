@@ -11,14 +11,17 @@
 |
 */
 
+use Illuminate\Routing\RouteGroup;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/perfil', 'UserController@perfil')->name('perfil');
-Route::post('/perfil', 'UserController@updateAvatar');
-
-Route::resource('paciente', 'PacienteController');
+Route::middleware('auth')->group(function () {
+    Route::resource('paciente', 'PacienteController');
+    Route::get('/perfil', 'UserController@perfil')->name('perfil');
+    Route::post('/perfil', 'UserController@updateAvatar');
+});
 
 Auth::routes();
 

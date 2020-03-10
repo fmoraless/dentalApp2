@@ -35,27 +35,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('home') }}" class="nav-link">Home</a>
+                <a href="{{ route('home') }}" class="nav-link"><i class="fas fa-home mr-2"></i>Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
+                <a href="{{ route('paciente.index') }}" class="nav-link"><i class="fas fa-user-friends mr-2"></i>Pacientes</a>
             </li>
         </ul>
 
         <!-- SEARCH FORM -->
-        <form class="form-inline ml-3">
-            <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-navbar" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+    {{--<form class="form-inline ml-3">
+        <div class="input-group input-group-sm">
+            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
-        </form>
+        </div>
+    </form>--}}
 
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
+    <!-- Right navbar links -->
+
+        {{--<ul class="navbar-nav ml-auto">
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
@@ -145,7 +146,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
                         class="fas fa-th-large"></i></a>
             </li>
-        </ul>
+        </ul>--}}
     </nav>
     <!-- /.navbar -->
 
@@ -153,7 +154,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a class="navbar-brand" href="{{ url('/') }}">
-            <i class="fas fa-tooth"></i>
+            <i class="fas fa-tooth brand-image"></i>
             <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
         </a>
 
@@ -163,7 +164,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="uploads/avatars/{{ Auth()->user()->avatar ?? 'uploads/avatars/default.png'}}" class="img-circle elevation-2" alt="User Image">
+                    <img src="uploads/avatars/{{ Auth()->user()->avatar ?? 'uploads/avatars/default.png'}}"
+                         class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">{{ Auth()->user()->name }}</a>
@@ -200,13 +202,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>
-                                Simple Link
-                                <span class="right badge badge-danger">New</span>
-                            </p>
+                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"><i
+                                class="fas fa-sign-out-alt nav-icon"></i>
+                            <p>{{ __('Logout') }}</p>
                         </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                              style="display: none;">
+                            @csrf
+                        </form>
                     </li>
                 </ul>
             </nav>
@@ -224,20 +228,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="col-sm-6">
                         <h1 class="m-0 text-dark">Starter Page</h1>
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Starter Page</li>
-                        </ol>
-                    </div><!-- /.col -->
+                {{--<div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Starter Page</li>
+                    </ol>
+                </div>--}}<!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
 
         <!-- Main content -->
-        @yield('content')
-        <!-- /.content -->
+    @yield('content')
+    <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
