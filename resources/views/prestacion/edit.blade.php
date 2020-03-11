@@ -1,94 +1,68 @@
-<div class="modal fade col-md-12" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Editar Paciente</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                {{ Form::open([ 'url' => url('paciente/test'), 'route' => route('paciente.update', 'test'),'method' => 'PUT']) }}
-                {{ Form::hidden('pcte_id', '', ['id' => 'pcte_id']) }}
-                <div class="form-group">
-                    {!! Form::label('rut', 'Rut') !!}
-                    {!! Form::text('rut', old('rut'), ['class' => 'form-control'.($errors->has('rut') ? '
-                    is-invalid' : ''), 'id' => 'rut'
-                    ]) !!}
-                    @if ($errors->has('rut'))
-                        <span class="invalid-feedback">
-                        <strong>{{ $errors->first('rut') }}</strong>
-                    </span>
-                    @endif
-                </div>
+@extends('layouts.master')
+@section('content')
+    <div class="container">
+        <div class="row justify-content-left">
+            <div class="col-sx-12 col-sm-12 col-lg-8">
+                <div class="card card-default">
+                    <div class="card-header">Editando Prestación</div>
+                    <div class="card-body">
+                        {{ Form::open(['action' => route('prestacion.update', $prestacion->id), 'method' => 'PUT', 'url' => 'prestacion/'.$prestacion->id, 'class' => 'form-horizontal']) }}
+                        <div class="form-group row">
+                            {!! Form::label('presta_nombre', 'Nombres', ['class' => 'col-sm-2 col-form-label']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('presta_nombre', $prestacion->presta_nombre, ['class' => 'form-control
+                                form-control-sm'.($errors->has('presta_nombre') ? '
+                                is-invalid' : ''),
+                                'placeholder' => 'Ingrese Nombre']) !!}
+                                @if ($errors->has('presta_nombre'))
+                                    <span class="invalid-feedback">
+                                <strong>{{ $errors->first('presta_nombre') }}</strong>
+                            </span>
+                                @endif
+                            </div>
+                        </div>
 
-                <div class="form-group">
-                    {!! Form::label('nombres', 'Nombres') !!}
-                    {!! Form::text('nombres', null, ['class' => 'form-control'.($errors->has('nombres') ?
-                    ' is-invalid'
-                    : '')]) !!}
-                    @if ($errors->has('nombres'))
-                        <span class="invalid-feedback">
-                        <strong>{{ $errors->first('nombres') }}</strong>
-                    </span>
-                    @endif
-                </div>
-                <div class="row">
-                    <div class="col form-group">
-                        {!! Form::label('apellido_paterno', 'Apellido Paterno') !!}
-                        {!! Form::text('apellido_paterno',null, ['class' =>
-                        'form-control'.($errors->has('apellido_paterno') ? ' is-invalid' : '')]) !!}
-                        @if ($errors->has('apellido_paterno'))
-                            <span class="invalid-feedback">
-                            <strong>{{ $errors->first('apellido_paterno') }}</strong>
-                        </span>
-                        @endif
+                        <div class="form-group row">
+                            {!! Form::label('presta_descripcion', 'Descripcion', ['class' => 'col-sm-2 col-form-label']) !!}
+                            <div class="col-sm-10">
+                                {!! Form::textarea('presta_descripcion',$prestacion->presta_descripcion, ['class' => 'form-control
+                                form-control-sm'.($errors->has('presta_descripcion') ? '
+                                is-invalid' : ''), 'placeholder' => 'Descripcion']) !!}
+                                @if ($errors->has('presta_descripcion'))
+                                    <span class="invalid-feedback">
+                                <strong>{{ $errors->first('presta_descripcion') }}</strong>
+                            </span>
+                                @endif
+                            </div>
+                        </div>
+                            <div class="form-group row">
+                                {!! Form::label('presta_descripcion', 'Descripcion', ['class' => 'col-sm-2 col-form-label']) !!}
+                                <div class="col-sm-5">
+                                    {!! Form::text('presta_valor',$prestacion->presta_valor, ['class' => 'form-control
+                                    form-control-sm'.($errors->has('presta_valor') ? '
+                                    is-invalid' : ''), 'placeholder' => 'Ingrese un valor']) !!}
+                                    @if ($errors->has('presta_valor'))
+                                        <span class="invalid-feedback">
+                                <strong>{{ $errors->first('presta_valor') }}</strong>
+                            </span>
+                                    @endif
+                                </div>
+                            </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                {{ Form::submit('Guardar', ['class' => 'btn bg-gradient-primary btn-sm btn-block']) }}
+                            </div>
+                            <div class="col">
+                                <a href="{{ route('prestacion.index') }}" style="text-decoration:none">
+                                    {{ Form::button('Cancelar', ['class' => 'btn bg-gradient-secondary btn-sm btn-block'] ) }}
+                                </a>
+                            </div>
+                        </div>
+                        {{ Form::close() }}
                     </div>
-                    <div class="col form-group">
-                        {!! Form::label('apellido_materno', 'Apellido Materno') !!}
-                        {!! Form::text('apellido_materno',null, ['class' => 'form-control']) !!}
-                    </div>
                 </div>
-                <div class="col form-group">
-                    {!! Form::label('fecha_nacimiento', 'Fecha Nacimiento') !!}
-                    {!! Form::date('fecha_nacimiento',null, ['class' => 'form-control']) !!}
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-                {{ Form::close() }}
             </div>
         </div>
     </div>
-</div>
-<script type="text/javascript">
-    $('#editModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        var rut = button.data('formrut')
-        var nombres = button.data('formnombres')
-        var apellido_paterno = button.data('formapellidopaterno')
-        var apellido_materno = button.data('formapellidomaterno')
-        var fecha_nacimiento = button.data('formfechanacimiento')
-        var pcte_id = button.data('formpcteid')
-
-
-        $('#editModal').find('.modal-body #rut').val(rut)
-        $('#editModal').find('.modal-body #nombres').val(nombres)
-        $('#editModal').find('.modal-body #apellido_paterno').val(apellido_paterno)
-        $('#editModal').find('.modal-body #apellido_materno').val(apellido_materno)
-        $('#editModal').find('.modal-body #fecha_nacimiento').val(fecha_nacimiento)
-        $('#editModal').find('.modal-body #pcte_id').val(pcte_id)
-
-    });
-    @error ('rut')
-    $('#editModal').modal('show');
-    @enderror
-    @error ('nombres')
-    $('#editModal').modal('show');
-    @enderror
-    @error ('apellido_paterno')
-    $('#editModal').modal('show');
-    @enderror
-</script>
+@stop

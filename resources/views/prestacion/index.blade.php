@@ -20,7 +20,7 @@
             <i class="fas fa-user-plus">
 
             </i>
-            Nueva Prestacion
+            Nueva Prestación
         </a>
     </div>
     <div class="col-md-12">
@@ -34,15 +34,11 @@
             </tr>
             </thead>
             <tbody>
-
             @foreach($prestaciones as $prestacion)
-
                 <tr>
-                    <td><a href="{{ route('prestacion.show', $prestacion->id) }}">{{ $prestacion->presta_nombre }}</a></td>
                     <td>{{ $prestacion->presta_nombre }}</td>
                     <td>{{ $prestacion->presta_descripcion }}</td>
                     <td>{{ $prestacion->presta_valor }}</td>
-
                     <td>
                         <a class="btn bg-gradient-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                            title="Editar"

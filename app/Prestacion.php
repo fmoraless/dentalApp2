@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prestacion extends Model
 {
+    protected $fillable = ['presta_nombre', 'presta_descripcion', 'presta_valor'];
+
+    public function presupuestos()
+    {
+        return $this->belongsTo(Presupuesto::class);
+    }
+
     public function scopeSearch($query, $q)
     {
         if ($q)

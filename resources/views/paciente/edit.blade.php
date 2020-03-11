@@ -77,7 +77,7 @@
                                 {{ Form::submit('Guardar', ['class' => 'btn bg-gradient-primary btn-sm btn-block']) }}
                             </div>
                             <div class="col">
-                                <a href="{{ route('paciente.index') }}">
+                                <a href="{{ route('paciente.index') }}" style="text-decoration:none">
                                     {{ Form::button('Cancelar', ['class' => 'btn bg-gradient-secondary btn-sm btn-block'] ) }}
                                 </a>
                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePrestacion;
 use App\Prestacion;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,7 @@ class PrestacionController extends Controller
      */
     public function create()
     {
-        //
+        return view('prestacion.create');
     }
 
     /**
@@ -38,43 +39,40 @@ class PrestacionController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePrestacion $request)
     {
-        //
-    }
+        $prestacion = new Prestacion($request->except('_token'));
+        $prestacion->save();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Prestacion $prestacion
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Prestacion $prestacion)
-    {
-        //
+        return redirect()->route('prestacion.index')->with('success', 'Nueva Prestacion ha sido creada con exito');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Prestacion $prestacion
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Prestacion $prestacion)
+    public function edit($id)
     {
-        //
+        $prestacion = Prestacion::findOrFail($id);
+        return view('prestacion.edit', compact('prestacion'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Prestacion $prestacion
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Prestacion $prestacion)
+    public function update(StorePrestacion $request, $id)
     {
-        //
+        $prestacion = Prestacion::findOrFail($id);
+
+        $prestacion->update($request->all());
+
+        return redirect()->route('prestacion.index')->with('success', 'Cambios relizados');
     }
 
     /**
