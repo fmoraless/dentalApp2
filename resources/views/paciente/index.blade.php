@@ -24,8 +24,8 @@
         </a>
     </div>
     <div class="col-md-12">
-        <table class="table table-hover table-md-responsive table-striped">
-            <thead class="thead-dark">
+        <table class="table table-hover table-md-responsive table-bordered">
+            <thead class="thead-light">
             <tr>
                 <th>Rut</th>
                 <th>Nombres</th>
