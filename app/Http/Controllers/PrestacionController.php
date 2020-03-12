@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePrestacion;
+use App\Http\Requests\UpdatePrestacion;
 use App\Prestacion;
 use Illuminate\Http\Request;
 
@@ -66,7 +67,7 @@ class PrestacionController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StorePrestacion $request, $id)
+    public function update(UpdatePrestacion $request, $id)
     {
         $prestacion = Prestacion::findOrFail($id);
 

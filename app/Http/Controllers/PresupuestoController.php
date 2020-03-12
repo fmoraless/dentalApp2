@@ -14,7 +14,7 @@ class PresupuestoController extends Controller
      */
     public function index()
     {
-        //
+        return view('presupuesto.index');
     }
 
     /**
