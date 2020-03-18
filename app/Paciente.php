@@ -13,6 +13,11 @@ class Paciente extends Model
         return $this->hasMany(Presupuesto::class);
     }
 
+    public function mensajes()
+    {
+        return $this->hasMany(Mensaje::class);
+    }
+
     public function scopeSearch($query, $q)
     {
         if ($q)
