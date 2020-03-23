@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Paciente extends Model
 {
-    protected $fillable = ['rut', 'nombres', 'apellido_paterno', 'apellido_materno', 'fecha_nacimiento', 'sexo'];
+    protected $fillable = ['rut', 'nombres', 'apellido_paterno', 'apellido_materno', 'fecha_nacimiento', 'sexo', 'telefono'];
 
     public function presupuestos()
     {

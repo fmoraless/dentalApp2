@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::resource('paciente', 'PacienteController');
     Route::resource('prestacion', 'PrestacionController')->except('show');
-    Route::resource('presupuesto', 'PresupuestoController')->except(['index', 'create']);
+    Route::resource('presupuesto', 'PresupuestoController')->except(['create']);
 
     //rutas para mensajes
     Route::resource('mensaje', 'MensajeController')->except('[index, create]');

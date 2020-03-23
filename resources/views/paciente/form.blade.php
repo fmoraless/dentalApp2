@@ -51,8 +51,20 @@
     <div class="col-sm-5">
         {!! Form::date('fecha_nacimiento',null, ['class' => 'form-control form-control-sm']) !!}
     </div>
-    <div class="col-sm-5">
+    {{--<div class="col-sm-5">
         {!! Form::select('sexo', ['Femenino' => 'Femenino', 'Masculino' => 'Masculino', 'Otro' => 'otro'], null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Seleccione Sexo']) !!}
+    </div>--}}
+</div>
+<div class="form-group row">
+    {!! Form::label('telefono', 'Télefono.', ['class' => 'col-sm-2 col-form-label']) !!}
+    <div class="col-sm-5">
+        {!! Form::tel('telefono',null, ['class' => 'form-control form-control-sm'.($errors->has('telefono') ? ' is-invalid' : ''), 'placeholder' =>
+            '12345678']) !!}
+        @if ($errors->has('telefono'))
+            <span class="invalid-feedback">
+               <strong>{{ $errors->first('telefono') }}</strong>
+            </span>
+        @endif
     </div>
 </div>
 <hr>
