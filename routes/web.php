@@ -20,8 +20,12 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::resource('paciente', 'PacienteController');
     Route::resource('prestacion', 'PrestacionController')->except('show');
-    Route::resource('presupuesto', 'PresupuestoController');
-    Route::resource('mensaje', 'MensajeController');
+    Route::resource('presupuesto', 'PresupuestoController')->except(['index', 'create']);
+
+    //rutas para mensajes
+    Route::resource('mensaje', 'MensajeController')->except('[index, create]');
+    Route::get('mensajes/{paciente?}', 'MensajeController@index')->name('mensajes');
+    Route::get('mensaje/create/{paciente?}', 'MensajeController@create')->name('mensaje.create');
 
     Route::get('/perfil', 'UserController@perfil')->name('perfil');
     Route::post('/perfil', 'UserController@updateAvatar');

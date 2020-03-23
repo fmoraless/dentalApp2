@@ -4,9 +4,9 @@
     <div class="row justify-content-left">
         <div class="col-sx-12 col-sm-12 col-lg-8">
             <div class="card card-default">
-                <div class="card-header">Datos del Paciente</div>
+                <div class="card-header">Mensaje</div>
                 <div class="card-body">
-                    @include('paciente.form')
+                    @include('mensaje.form')
                 </div>
             </div>
         </div>

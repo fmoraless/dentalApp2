@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Mensaje;
+use App\Paciente;
+use http\Params;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MensajeController extends Controller
 {
@@ -12,12 +15,12 @@ class MensajeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index($id)
     {
-        $mensajes = Mensaje::latest('fecha_mensaje')
-            ->where('paciente_id', $request->paciente_id)->get();
+        $paciente = Paciente::findOrFail($id);
+        $mensajes = Mensaje::where('paciente_id', $id)->orderBy('fecha_mensaje', 'desc')->paginate(3);
 
-        return view('mensaje.index', compact('mensajes'));
+        return view('mensaje.index', compact('mensajes', 'paciente'));
     }
 
     /**
@@ -25,9 +28,11 @@ class MensajeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $paciente = Paciente::findOrFail($id);
+
+        return view('mensaje.create', compact('paciente'));
     }
 
     /**
@@ -38,7 +43,13 @@ class MensajeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $mensaje = new Mensaje($request->except('_token'));
+        $mensaje->creador_mensaje = Auth::user()->rut;
+        $mensaje->paciente_id = $request->paciente_id;
+        $mensaje->save();
+
+        return redirect('paciente/'.$request->paciente_id);
     }
 
     /**
