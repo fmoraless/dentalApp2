@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Mensaje;
 use App\Paciente;
-use http\Params;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,13 +42,18 @@ class MensajeController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+        $this->validate($request, [
+            'fecha_mensaje' => 'date|required',
+            'titulo_mensaje' => 'string|required|min:3',
+            'cuerpo_mensaje' => 'string|required|min:5'
+        ]);
+
         $mensaje = new Mensaje($request->except('_token'));
         $mensaje->creador_mensaje = Auth::user()->rut;
         $mensaje->paciente_id = $request->paciente_id;
         $mensaje->save();
 
-        return redirect('paciente/'.$request->paciente_id);
+        return redirect('paciente/' . $request->paciente_id);
     }
 
     /**

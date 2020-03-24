@@ -13,7 +13,7 @@
                                 {!! Form::text('rut', $paciente->rut, ['class' => 'form-control
                                 form-control-sm'.($errors->has('rut')
                                 ? ' is-invalid' :
-                                ''), 'placeholder' =>
+                                old('rut')), 'placeholder' =>
                                 '00000000-X']) !!}
                                 @if ($errors->has('rut'))
                                     <span class="invalid-feedback">

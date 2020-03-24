@@ -60,8 +60,10 @@ class PacienteController extends Controller
         $paciente = Paciente::findOrFail($id);
 
         $mensajes = $paciente->mensajes()->latest()->get()->take(1);
+        $presupuestos = $paciente->presupuestos()->latest()->get()->take(3);
 
-        return view('paciente.show', compact('paciente', 'mensajes'));
+
+        return view('paciente.show', compact('paciente', 'mensajes', 'presupuestos'));
     }
 
     /**
@@ -73,6 +75,7 @@ class PacienteController extends Controller
     public function edit($id)
     {
         $paciente = Paciente::findOrFail($id);
+
         return view('paciente.edit', compact('paciente'));
     }
 
@@ -86,6 +89,10 @@ class PacienteController extends Controller
     public function update(Request $request, $id)
     {
         $paciente = Paciente::findOrFail($id);
+
+        $this->validate($request,[
+            'rut' => 'required|cl_rut',
+        ]);
 
         $paciente->update($request->all());
 

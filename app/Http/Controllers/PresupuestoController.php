@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Paciente;
+use App\Prestacion;
 use App\Presupuesto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PresupuestoController extends Controller
 {
@@ -24,7 +27,10 @@ class PresupuestoController extends Controller
      */
     public function create()
     {
-        //
+        $paciente = Paciente::findOrFail($id);
+        $prestaciones = Prestacion::orderBy('presta_nombre')->get();
+
+        return view('presupuesto.create', compact('paciente', 'prestaciones'));
     }
 
     /**
@@ -35,7 +41,16 @@ class PresupuestoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
 
+        ]);
+
+        $presupuesto = new Presupuesto($request->except('_token'));
+        $presupuesto->presup_creador = Auth::user()->rut;
+        $presupuesto->paciente_id = $request->paciente_id;
+        $presupuesto->save();
+
+        return redirect('paciente/' . $request->paciente_id);
     }
 
     /**

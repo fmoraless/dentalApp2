@@ -3,7 +3,12 @@
 <div class="form-group row">
     {!! Form::label('fecha_mensaje', 'Fecha Mensaje', ['class' => 'col-sm-2 col-form-label']) !!}
     <div class="col-sm-5">
-        {!! Form::date('fecha_mensaje',null, ['class' => 'form-control form-control-sm']) !!}
+        {!! Form::date('fecha_mensaje',null, ['class' => 'form-control form-control-sm'.($errors->has('fecha_mensaje') ? ' is-invalid' : old('fecha_mensaje'))]) !!}
+        @if ($errors->has('fecha_mensaje'))
+            <span class="invalid-feedback">
+            <strong>{{ $errors->first('fecha_mensaje') }}</strong>
+        </span>
+        @endif
     </div>
 </div>
 
@@ -14,7 +19,7 @@
         form-control-sm'.($errors->has('titulo_mensaje') ? ' is-invalid' : ''), 'placeholder' =>
         'Titulo del mensaje']) !!}
         @if ($errors->has('titulo_mensaje'))
-        <span class="invalid-feedback">
+            <span class="invalid-feedback">
             <strong>{{ $errors->first('titulo_mensaje') }}</strong>
         </span>
         @endif
@@ -27,7 +32,7 @@
         form-control-sm'.($errors->has('cuerpo_mensaje') ? ' is-invalid' : ''),
         'placeholder' => 'Ingrese cuerpo del mensaje']) !!}
         @if ($errors->has('cuerpo_mensaje'))
-        <span class="invalid-feedback">
+            <span class="invalid-feedback">
             <strong>{{ $errors->first('cuerpo_mensaje') }}</strong>
         </span>
         @endif
