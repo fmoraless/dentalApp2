@@ -25,7 +25,7 @@ class PresupuestoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $paciente = Paciente::findOrFail($id);
         $prestaciones = Prestacion::orderBy('presta_nombre')->get();
@@ -36,18 +36,16 @@ class PresupuestoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-
-        ]);
-
+        dd($request->all());
         $presupuesto = new Presupuesto($request->except('_token'));
         $presupuesto->presup_creador = Auth::user()->rut;
         $presupuesto->paciente_id = $request->paciente_id;
+
         $presupuesto->save();
 
         return redirect('paciente/' . $request->paciente_id);
@@ -56,7 +54,7 @@ class PresupuestoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Presupuesto  $presupuesto
+     * @param \App\Presupuesto $presupuesto
      * @return \Illuminate\Http\Response
      */
     public function show(Presupuesto $presupuesto)
@@ -67,7 +65,7 @@ class PresupuestoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Presupuesto  $presupuesto
+     * @param \App\Presupuesto $presupuesto
      * @return \Illuminate\Http\Response
      */
     public function edit(Presupuesto $presupuesto)
@@ -78,8 +76,8 @@ class PresupuestoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Presupuesto  $presupuesto
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Presupuesto $presupuesto
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Presupuesto $presupuesto)
@@ -90,7 +88,7 @@ class PresupuestoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Presupuesto  $presupuesto
+     * @param \App\Presupuesto $presupuesto
      * @return \Illuminate\Http\Response
      */
     public function destroy(Presupuesto $presupuesto)

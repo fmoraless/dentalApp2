@@ -1,41 +1,18 @@
-{{ Form::open(['action' => 'PrestacionController@store', 'method' => 'POST', 'class' => 'form-horizontal']) }}
+{{ Form::open(['action' => 'PresupuestoController@store', 'method' => 'POST', 'class' => 'form-horizontal']) }}
+{!! Form::hidden('paciente_id', $paciente->id) !!}
 <div class="form-group row">
-    {!! Form::label('presta_nombre', 'Nombre', ['class' => 'col-sm-2 col-form-label']) !!}
+    {!! Form::label('presup_descripcion', 'Descripción', ['class' => 'col-sm-2 col-form-label']) !!}
     <div class="col-sm-6">
-        {!! Form::text('presta_nombre', null, ['class' => 'form-control form-control-sm'.($errors->has('presta_nombre') ? ' is-invalid' : ''), 'placeholder' =>
-        'indique nombre prestación']) !!}
-        @if ($errors->has('presta_nombre'))
+        {!! Form::text('presup_descripcion', null, ['class' => 'form-control form-control-sm'.($errors->has('presup_descripcion') ? ' is-invalid' : ''), 'placeholder' =>
+        'indique descripción']) !!}
+        @if ($errors->has('presup_descripcion'))
             <span class="invalid-feedback">
-               <strong>{{ $errors->first('presta_nombre') }}</strong>
+               <strong>{{ $errors->first('presup_descripcion') }}</strong>
             </span>
         @endif
     </div>
 </div>
-<div class="form-group row">
-    {!! Form::label('presta_descripcion', 'Descripcion', ['class' => 'col-sm-2 col-form-label']) !!}
-    <div class="col-sm-10">
-        {!! Form::textarea('presta_descripcion', null, ['class' => 'form-control form-control-sm'.($errors->has('presta_descripcion') ? ' is-invalid' : ''),
-    'placeholder' => 'Ingrese Descripcion']) !!}
-        @if ($errors->has('presta_descripcion'))
-            <span class="invalid-feedback">
-                          <strong>{{ $errors->first('presta_descripcion') }}</strong>
-                        </span>
-        @endif
-    </div>
-</div>
 
-<div class="form-group row">
-    {!! Form::label('presta_valor', 'Valor', ['class' => 'col-sm-2 col-form-label']) !!}
-    <div class="col-sm-5">
-        {!! Form::number('presta_valor',null, ['class' => 'form-control form-control-sm'.($errors->has('presta_valor') ? '
-        is-invalid' : ''), 'placeholder' => 'ingrese valor']) !!}
-        @if ($errors->has('presta_valor'))
-            <span class="invalid-feedback">
-                          <strong>{{ $errors->first('presta_valor') }}</strong>
-                        </span>
-        @endif
-    </div>
-</div>
 <hr>
 <div class="row">
     <div class="col">

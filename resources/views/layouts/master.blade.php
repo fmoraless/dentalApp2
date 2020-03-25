@@ -41,7 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{ route('paciente.index') }}" class="nav-link"><i
-                            class="fas fa-user-friends mr-2"></i>Pacientes</a>
+                        class="fas fa-user-friends mr-2"></i>Pacientes</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{ route('prestacion.index') }}" class="nav-link"><i class="fas fa-diagnoses mr-2"></i>Prestaciones</a>
@@ -85,8 +85,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{ asset('uploads/avatars') }}/{{ Auth()->user()->avatar ?? asset('uploads/avatars/default.png') }}"
-                         class="img-circle elevation-2" alt="User Image">
+                    <img
+                        src="{{ asset('uploads/avatars') }}/{{ Auth()->user()->avatar ?? asset('uploads/avatars/default.png') }}"
+                        class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="{{ route('perfil') }}" class="d-block">Dr. {{ Auth()->user()->name }}</a>
@@ -109,6 +110,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                                <a href="{{ route('paciente.index') }}"
+                                   class="nav-link active">
+                                    <i class="fas fa-user-friends mr-2"></i>
+                                    <p>Pacientes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('prestacion.index') }}" class="nav-link active">
+                                    <i class="fas fa-diagnoses mr-2">
+                                    </i>
+                                    <p>Prestaciones</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#" class="nav-link active">
                                     <i class="fas fa-calculator nav-icon"></i>
                                     <p>Mis Presupuestos</p>
@@ -117,10 +132,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <a class="nav-link active" href="{{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();"><i
-                                    class="fas fa-sign-out-alt nav-icon"></i>
-                            <p>{{ __('Logout') }}</p>
+                                class="fas fa-sign-out-alt nav-icon"></i>
+                            <p>{{ __('Logout') }}
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
