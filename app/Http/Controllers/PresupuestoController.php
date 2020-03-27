@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Paciente;
 use App\Prestacion;
 use App\Presupuesto;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +29,7 @@ class PresupuestoController extends Controller
     public function create($id)
     {
         $paciente = Paciente::findOrFail($id);
-        $prestaciones = Prestacion::orderBy('presta_nombre')->get();
+        $prestaciones = Prestacion::orderBy('presta_nombre', 'DESC')->pluck('presta_nombre', 'id');
 
         return view('presupuesto.create', compact('paciente', 'prestaciones'));
     }
@@ -44,11 +45,13 @@ class PresupuestoController extends Controller
         dd($request->all());
         $presupuesto = new Presupuesto($request->except('_token'));
         $presupuesto->presup_creador = Auth::user()->rut;
+        $presupuesto->presup_expiracion = Carbon::now()->addMonth();
         $presupuesto->paciente_id = $request->paciente_id;
-
         $presupuesto->save();
 
-        return redirect('paciente/' . $request->paciente_id);
+        $presupuesto->prestaciones()->sync($request->prestaciones);
+
+        return redirect()->route('paciente/' . $request->paciente_id);
     }
 
     /**

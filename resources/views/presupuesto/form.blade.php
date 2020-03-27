@@ -13,6 +13,13 @@
     </div>
 </div>
 
+<div class="form-group row">
+    {{ Form::label('presta_nombre', 'Prestacion', ['class' => 'col-sm-2 col-form-label']) }}
+    <div class="col-sm-6">
+        {!! Form::select('prestaciones[]', $prestaciones, null, ['class' => 'form-control form-control-sm select-prestaciones']) !!}
+    </div>
+</div>
+
 <hr>
 <div class="row">
     <div class="col">
@@ -25,3 +32,9 @@
     </div>
 </div>
 {{ Form::close() }}
+<script>
+    $(".select-prestaciones").select2({
+        placeholder: 'Seleccione Prestacion',
+        allowClear: true
+    });
+</script>
