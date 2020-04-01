@@ -42,10 +42,6 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function username()
-    {
-        return 'rut';
-    }
 
     public function fullName(){
 

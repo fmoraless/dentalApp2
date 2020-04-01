@@ -39,19 +39,16 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    /**
-     * Validate the user login request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
     public function validateLogin(Request $request)
     {
         $request->validate([
             $this->username() => 'required|cl_rut',
             'password' => 'required|string',
         ]);
+    }
+
+    public function username()
+    {
+        return 'rut';
     }
 }
