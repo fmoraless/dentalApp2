@@ -11,25 +11,30 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Scripts -->
-        <!-- <script src="https://licandent.herokuapp.com/js/app.js"></script> -->
-        <script src="{{ secure_asset('js/app.js') }}"></script>
-
+        @if(env('APP_ENV') == 'local')
+        <script src="{{ asset('js/app.js') }}"></script>
+        @else
+        <script src="{{ secure_asset(js/app.js) }}"></script>
+        @endif
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
         <!-- Styles -->
-        <!-- <link href="https://licandent.herokuapp.com/css/app.css" rel="stylesheet"> -->
+        @if(env('APP_ENV') == 'local')
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        @else
         <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+        @endif
     </head>
 
     <body>
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container">
-                        <a class="navbar-brand" href="{{ url('/') }}">
-                            <i class="fas fa-tooth"></i> {{ config('app.name', 'Laravel') }}
-                        </a>
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        <i class="fas fa-tooth"></i> {{ config('app.name', 'Laravel') }}
+                    </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -82,4 +87,5 @@
             </main>
         </div>
     </body>
+
 </html>

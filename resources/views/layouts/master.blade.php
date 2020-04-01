@@ -15,10 +15,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ secure_asset('js/app.js') }}"></script>
+    @if(env('APP_ENV') == 'local')
+        <script src="{{ asset('js/app.js') }}"></script>
+        @else
+        <script src="{{ secure_asset(js/app.js) }}"></script>
+        @endif
 
     <!-- Styles -->
-    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    @if(env('APP_ENV') == 'local')
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        @else
+        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+        @endif
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
