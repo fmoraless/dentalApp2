@@ -37,6 +37,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'rut';
+    }
+
     public function fullName(){
 
         return ucfirst( $this->name." ". $this->apellido_paterno." ".$this->apellido_materno);
