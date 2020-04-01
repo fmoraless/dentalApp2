@@ -14,7 +14,7 @@
         @if(env('APP_ENV') == 'local')
         <script src="{{ asset('js/app.js') }}"></script>
         @else
-        <script src="{{ secure_asset(js/app.js) }}"></script>
+        <script src="{{ secure_asset('js/app.js') }}"></script>
         @endif
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
