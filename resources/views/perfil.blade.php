@@ -5,9 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-10 col-md-offset-1">
                 @if(env('APP_ENV') == 'local')
-                    <img src="asset(uploads/avatars/{{ $user->avatar }})"
+                    <img src="{{ asset('uploads/avatars') }}/{{ $user->avatar ?? asset('uploads/avatars/default.png' }})"
                 @else
-                    <img src="secure_asset(uploads/avatars/{{ $user->avatar }})"
+                    <img src="{{ secure_asset('uploads/avatars'}}/{{ $user->avatar ?? asset('uploads/avatars/default.png' }})"
                          @endif
                          style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px">
                     <h2>Perfil de <strong>Dr(a). {{ Auth::user()->name .' '. Auth::user()->apellido_paterno}}</strong>

@@ -95,9 +95,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
                     @if(env('APP_ENV') == 'local')
-                        <img src="{{ asset('uploads/avatars') }}/{{ Auth()->user()->avatar ?? asset('images/default.png') }}"
+                        <img src="{{ asset('uploads/avatars') }}/{{ Auth()->user()->avatar ?? asset('uploads/avatars/default.png') }}"
                     @else
-                        <img src="{{ secure_asset('uploads/avatars') }}/{{ Auth()->user()->avatar ?? secure_asset('images/default.png') }}"
+                        <img src="{{ secure_asset('uploads/avatars') }}/{{ Auth()->user()->avatar ?? secure_asset('uploads/avatars/default.png') }}"
                              @endif
                              class="img-circle elevation-2" alt="User Image">
                 </div>
@@ -207,7 +207,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <strong><i class="fab fa-laravel"></i> Made with Laravel </strong>
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; {{ now()->year }} <a href="https://github.com/m4ury"
+        <strong>Copyright &copy; {{ now()->year }} <a target="_blank" href="https://github.com/m4ury"
                                                       style="text-decoration:none">
                 <i class="fab fa-github"></i> Mauricio Morales</a>.</strong> All rights reserved.
     </footer>
