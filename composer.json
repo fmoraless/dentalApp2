@@ -13,6 +13,7 @@
         "fideloper/proxy": "^4.0",
         "freshwork/chilean-bundle": "^2.0",
         "intervention/image": "^2.5",
+        "ext-gd":" *",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "laravelcollective/html": "^6.0",
