@@ -1,52 +1,67 @@
 @extends('layouts.master')
 @section('content')
-    <div class="container">
-        <div class="row justify-content-left">
-            <div class="col-sx-12 col-sm-12 col-lg-8">
-                <div class="card card-default">
-                    <div class="card-header">Paciente</div>
-                    <div class="card-body">
-                        {{ Form::open(['action' => 'PresupuestoController@store', 'method' => 'POST', 'class' => 'form-horizontal']) }}
-                        <div class="form-group row">
-                            {!! Form::label('rut', 'Rut', ['class' => 'col-sm-3 col-form-label']) !!}
-                            <div class="col-sm-5">
-                                {!! Form::text('rut', null, ['class' => 'form-control form-control-sm'.($errors->has('rut') ? ' is-invalid' : ''), 'placeholder' =>
-                                '00000000-X']) !!}
-                                @if ($errors->has('rut'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('rut') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            {!! Form::label('nombres', 'Nombres', ['class' => 'col-sm-3 col-form-label']) !!}
-                            <div class="col-sm-6">
-                                {!! Form::text('nombres', null, ['class' => 'form-control form-control-sm'.($errors->has('nombres') ? ' is-invalid' : ''),
-                            'placeholder' => 'Ingrese Nombres']) !!}
-                                @if ($errors->has('nombres'))
-                                    <span class="invalid-feedback">
-                          <strong>{{ $errors->first('nombres') }}</strong>
-                        </span>
-                                @endif
-                            </div>
-                        </div>
+    <div class="col-md-12">
 
-                        <div class="form-group row">
-                            {!! Form::label('apellidos', 'Apellidos', ['class' => 'col-sm-3 col-form-label']) !!}
-                            <div class="col-sm-6">
-                                {!! Form::text('apellido_paterno',null, ['class' => 'form-control form-control-sm'.($errors->has('apellido_paterno') ? '
-                                is-invalid' : ''), 'placeholder' => 'Apellido Paterno']) !!}
-                                @if ($errors->has('apellido_paterno'))
-                                    <span class="invalid-feedback">
-                          <strong>{{ $errors->first('apellido_paterno') }}</strong>
-                        </span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        {{--        success alert al crear--}}
+
+        <div class="page-header">
+            <div class="form-group">
+                {!! Form::open(['route' => 'paciente.index', 'method' => 'GET', 'class' => 'form-inline float-right pb-2'])
+                !!}
+                {{ Form::text('q', null, ['class' => 'form-control mx-1', 'placeholder' => 'Buscar'], isset($q) ? $q : '') }}
+                <button type="submit" class="btn btn-secondary form-control"><span><i
+                                class="fas fa-search"></i></span></button>
+                {!! Form::close() !!}
             </div>
         </div>
+    </div>
+    <div class="col-sm-6">
+        <a class="btn bg-gradient-success btn-sm" title="Nuevo Presupuesto" href="{{ route('presupuesto.create') }}">
+            <i class="fas fa-user-plus">
+
+            </i>
+            Presupuesto
+        </a>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-hover table-md-responsive table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th>Numero Presupuesto</th>
+                <th>Status</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th colspan="2" class="text-center">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @foreach($presupuestos ?? '' as $presupuesto)
+
+                <tr>
+                    <td>
+                        <a href="{{ route('presupuesto.show', $presupuesto->id) }}">{{ $presupuesto->id }}</a>
+
+                    </td>
+                    <td>{{ $presupuesto->status }}</td>
+                    <td>{{ $presupuesto->created_at }}</td>
+                    <td>{{ $presupuesto->total }}</td>
+                    <td>{{ $presupuesto->fecha_expiracion }}</td>
+
+                    <td>
+                        <a class="btn bg-gradient-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                           title="Editar"
+                           href="{{ route('presupuesto.edit', $presupuesto->id) }}"><i class="fas fa-pen"></i>
+                        </a>
+                        <a class="btn bg-gradient-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                           title="Detalle"
+                           href="{{ route('presupuesto.edit', $presupuesto->id) }}">"<i class="fas fa-bars"></i>
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+
     </div>
 @stop

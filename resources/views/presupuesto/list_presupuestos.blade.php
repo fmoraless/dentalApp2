@@ -1,4 +1,4 @@
-@if($presupuestos)
+@if($presupuesto)
     <div class="col-sm-6 mb-2">
         <a class="btn bg-gradient-success btn-sm" title="Nuevo presupuesto"
            href="{{ route('presupuesto.create', $paciente->id) }}">
@@ -8,7 +8,7 @@
     </div>
     <hr>
     <div class="col pb-2">
-        @foreach($presupuestos as $presupuesto)
+        @foreach($presupuesto as $presupuesto)
             <div class="card card-outline card-dark">
                 <div class="card-header">
                     <h6 class="card-title text-bold">
