@@ -18,7 +18,9 @@ class PresupuestoController extends Controller
      */
     public function index()
     {
-        return view('presupuesto.index');
+        $presupuestos = Presupuesto::all();
+        return view('presupuesto.index', compact('presupuestos'));
+
     }
 
     /**
@@ -26,12 +28,12 @@ class PresupuestoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $paciente = Paciente::findOrFail($id);
-        $prestaciones = Prestacion::orderBy('presta_nombre', 'DESC')->pluck('presta_nombre', 'id');
+        /*$paciente = Paciente::findOrFail($id);
+        $prestaciones = Prestacion::orderBy('presta_nombre', 'DESC')->pluck('presta_nombre', 'id');*/
 
-        return view('presupuesto.create', compact('paciente', 'prestaciones'));
+        return view('presupuesto.create');
     }
 
     /**
@@ -42,7 +44,7 @@ class PresupuestoController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         $presupuesto = new Presupuesto($request->except('_token'));
         $presupuesto->presup_creador = Auth::user()->rut;
         $presupuesto->presup_expiracion = Carbon::now()->addMonth();
@@ -62,7 +64,8 @@ class PresupuestoController extends Controller
      */
     public function show(Presupuesto $presupuesto)
     {
-        //
+        dd($presupuesto);
+        return view('presupuesto.show',compact('presupuesto'));
     }
 
     /**
@@ -73,7 +76,10 @@ class PresupuestoController extends Controller
      */
     public function edit(Presupuesto $presupuesto)
     {
-        //
+        return view('presupuesto.edit', compact('presupuesto'));
+
+        /*$presupuesto = Presupuesto::findOrFail($id);
+        return view('presupuesto.edit', compact('presupuesto'));*/
     }
 
     /**
