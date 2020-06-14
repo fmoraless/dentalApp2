@@ -10,7 +10,8 @@ class Prestacion extends Model
 
     public function presupuestos()
     {
-        return $this->belongsTo(Presupuesto::class);
+        return $this->belongsToMany(Presupuesto::class)
+            ->using(PrestacionPresupuesto::class);
     }
 
     public function scopeSearch($query, $q)
