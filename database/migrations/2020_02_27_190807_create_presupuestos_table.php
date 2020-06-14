@@ -26,11 +26,14 @@ class CreatePresupuestosTable extends Migration
             $table->unsignedBigInteger('paciente_id')->nullable();
         });
 
+
         Schema::table('presupuestos', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreign('abono_id')->references('id')->on('abonos')->onUpdate('cascade')->onDelete('set null');
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onUpdate('cascade')->onDelete('set null');
           });
+
+        DB::statement("ALTER TABLE presupuestos AUTO_INCREMENT = 5700000000;");
     }
 
     /**
