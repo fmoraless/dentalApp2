@@ -135,7 +135,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link active">
+                                <a href="{{ route('presupuesto.index') }}" class="nav-link active">
                                     <i class="fas fa-calculator nav-icon"></i>
                                     <p>Mis Presupuestos</p>
                                 </a>
