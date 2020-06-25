@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('paciente', 'PacienteController');
     Route::resource('prestacion', 'PrestacionController')->except('show');
     Route::resource('presupuesto', 'PresupuestoController');
+    Route::get('selectPrestacion', 'PrestacionController@selectPrestacion')->name('seleccione.prestacion');
     Route::get('presupuesto/create/{paciente?}', 'PresupuestoController@create')->name('presupuesto.create');
 
 

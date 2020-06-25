@@ -49,7 +49,7 @@
                                     <div class="tab-pane fade" id="vert-tabs-presupuestos" role="tabpanel"
                                          aria-labelledby="vert-tabs-presupuestos-tab">
 
-                                        @include('presupuesto.list_presupuestos', $paciente)
+{{--                                        @include('presupuesto.list_presupuestos', $paciente)--}}
                                         @if($paciente->presupuestos->count() > 0)
                                             <a href="{{ route('presupuesto', $paciente->id) }}"><span
                                                     class="text-bold">Ver Todos los presupuestos...</span></a>
