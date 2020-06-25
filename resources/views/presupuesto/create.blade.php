@@ -16,7 +16,7 @@
                         <div class="form-group">
                             <label for="">Buscador Prestaciones</label>
                             <div class="input-group input-group">
-                                <input type="text" class="form-control" placeholder="Ingrese una prestación" autocomplete="off">
+                                <input id="prestaciones" type="text" class="form-control" placeholder="Ingrese una prestación" autocomplete="off">
                                 <span class="input-group-append">
                                 <button type="button" class="btn btn-danger btn-flat">
                                     <i class="fas fa-times"></i>
@@ -98,4 +98,22 @@
         </a>
     </div>
 </div>
+<script>
+/*    $(function() {
+        $('#prestaciones').select2({
+            theme:"boostrap4"
+        });
+    });*/
+$(function() {
+    $('#prestaciones').select2({
+        ajax: {
+            theme: "boostrap4",
+            url: "{{ route('seleccione.prestacion') }}",
+            dataType: 'json'
+            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+        }
+    });
+});
+</script>
 @stop
+
