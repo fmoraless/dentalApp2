@@ -1,4 +1,4 @@
-@if($status)
+@if($mensajes)
     <div class="col-sm-6 mb-2">
         <a class="btn bg-gradient-success btn-sm" title="Nuevo mensaje"
            href="{{ route('mensaje.create', $paciente->id) }}">
@@ -8,7 +8,7 @@
     </div>
     <hr>
     <div class="col pb-2">
-        @foreach($status as $mensaje)
+        @foreach($mensajes as $mensaje)
             <div class="card card-outline card-dark">
                 <div class="card-header">
                     <h6 class="card-title text-bold">
