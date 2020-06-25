@@ -34,7 +34,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div id="app" class="wrapper">
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-dark bg-cyan">
@@ -216,6 +216,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- REQUIRED SCRIPTS -->
 </body>
+<link href="{{ asset('select2/css/select2.min.css') }}"></link>
+<script src="{{ asset('select2/js/select2.min.js') }}"></script>
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
