@@ -1,119 +1,110 @@
 @extends('layouts.master')
+
 @section('content')
-<div class="card card-primary">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="card card-secondary">
+
+    <div class="card">
+        <div class="card-header">
+            Presupuesto
+        </div>
+
+        <div class="card-body">
+            <form action="{{ route("presupuesto.store") }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group {{ $errors->has('presup_descripcion') ? 'has-error' : '' }}">
+                    <label for="">Cliente</label>
+                    <input type="text" id="presup_descripcion" name="presup_descripcion" class="form-control" value="{{ old('presup_descripcion', isset($presupuesto) ? $presupuesto->presup_descripcion : '') }}" required>
+                    @if($errors->has('presup_descripcion'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('presup_descripcion') }}
+                        </em>
+                    @endif
+                    <p class="helper-block">
+                    </p>
+                </div>
+                <div class="form-group {{ $errors->has('customer_email') ? 'has-error' : '' }}">
+                    <label for="customer_email">Observacion</label>
+                    <input type="text" id="presup_observacion" name="presup_observacion" class="form-control" value="{{ old('presup_observacion', isset($presupuesto) ? $presupuesto->presup_observacion : '') }}">
+                    @if($errors->has('presup_observacion'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('presup_observacion') }}
+                        </em>
+                    @endif
+                    <p class="helper-block">
+                    </p>
+                </div>
+
+                <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="fas fa-notes-medical"></i>
-                            Detalle de prestaciones
-                        </h3>
+                        Prestaciones
                     </div>
-                    <!-- /.card-header -->
+
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="">Buscador Prestaciones</label>
-                            <div class="input-group input-group">
-                                <input id="prestaciones" type="text" class="form-control" placeholder="Ingrese una prestación" autocomplete="off">
-                                <span class="input-group-append">
-                                <button type="button" class="btn btn-danger btn-flat">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </span>
+                        <table class="table" id="prestaciones_table">
+                            <thead>
+                            <tr>
+                                <th>Prestacion</th>
+                                <th>Cantidad</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (old('prestaciones', ['']) as $index => $oldPrestacion)
+                                <tr id="prestacion{{ $index }}">
+                                    <td>
+                                        <select name="prestaciones[]" class="form-control">
+                                            <option value="">-- choose prestacion --</option>
+                                            @foreach ($prestaciones as $prestacion)
+                                                <option value="{{ $prestacion->id }}"{{ $oldPrestacion == $prestacion->id ? ' selected' : '' }}>
+                                                    {{ $prestacion->presta_nombre }} (${{ number_format($prestacion->presta_valor, 2) }})
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="cantidades[]" class="form-control" value="{{ old('cantidades.' . $index) ?? '1' }}" />
+                                    </td>
+                                </tr>
+                            @endforeach
+                            <tr id="prestacion{{ count(old('prestaciones', [''])) }}"></tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button id="add_row" class="btn btn-default pull-left">+ Add Row</button>
+                                <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
                             </div>
                         </div>
                     </div>
-                    <hr>
-                    <table class="table table-hover table-md-responsive table-bordered" id="data">
-                        <thead>
-                            <tr>
-                                <th>Eliminar</th>
-                                <th>Prestacion</th>
-                                <th>Estado</th>
-                                <th>Cantidad</th>
-                                <th>Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                    <!-- /.table -->
                 </div>
-            </div>
-            <!-- /.col-lg-8 -->
-            <div class="col-lg-4">
-                <div class="card card-secondary">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="fas fa-file-medical"></i>
-                            Detalle de presupuesto
-                        </h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="">Fecha de creación</label>
-                            <input type="text" class="form-control" placeholder="Ingrese una prestación" autocomplete="off">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Paciente</label>
-                            <select class="form-control">
-                                <option>Cliente 1</option>
-                                <option>Cliente 2</option>
-                                <option>Cliente 3</option>
-                                <option>Cliente 4</option>
-                                <option>Cliente 5</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Sub total</label>
-                            <input type="number" class="form-control" placeholder="0,00" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="">IVA%</label>
-                            <input type="number" class="form-control" placeholder="0,00" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Total</label>
-                            <input type="number" class="form-control" placeholder="0,00" autocomplete="off">
-                        </div>
-                    </div>
-                    <hr>
-
-                    <!-- /.table -->
+                <div>
+                    <input class="btn btn-info" type="submit" value="Crear Presupuesto">
                 </div>
-            </div>
-            <!-- /.col-lg-4 -->
+            </form>
+
+
         </div>
     </div>
-    <!-- /.card body -->
-    <div class="card-footer">
-        <a class="btn btn-success btn-flat btn-Test">
-            <i class="fas fa-save"></i>
-            Nuevo presupuesto
-        </a>
-    </div>
-</div>
-<script>
-/*    $(function() {
-        $('#prestaciones').select2({
-            theme:"boostrap4"
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            let row_number = {{ count(old('prestaciones', [''])) }};
+            $("#add_row").click(function(e){
+                e.preventDefault();
+                let new_row_number = row_number - 1;
+                $('#prestacion' + row_number).html($('#prestacion' + new_row_number).html()).find('td:first-child');
+                $('#prestaciones_table').append('<tr id="prestacion' + (row_number + 1) + '"></tr>');
+                row_number++;
+            });
+            $("#delete_row").click(function(e){
+                e.preventDefault();
+                if(row_number > 1){
+                    $("#prestacion" + (row_number - 1)).html('');
+                    row_number--;
+                }
+            });
         });
-    });*/
-$(function() {
-    $('#prestaciones').select2({
-        ajax: {
-            theme: "boostrap4",
-            url: "{{ route('seleccione.prestacion') }}",
-            dataType: 'json'
-            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
-        }
-    });
-});
-</script>
-@stop
+    </script>
+@endsection
 

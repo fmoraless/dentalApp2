@@ -89,8 +89,8 @@ class PrestacionController extends Controller
 
     public function selectPrestacion(Request $request)
     {
-        $prestacion = Prestacion::pluck('presta_nombre','id')->toArray();
-
-        return $prestacion;
+//        $prestacion = Prestacion::pluck('presta_nombre','id')->toArray();
+        $prestacion = Prestacion::pluck('presta_nombre','id')->prepend('seleccione');
+        return response()->json($prestacion);
     }
 }

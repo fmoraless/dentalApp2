@@ -215,6 +215,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
+@yield('scripts')
 </body>
 <link href="{{ asset('select2/css/select2.min.css') }}"></link>
 <script src="{{ asset('select2/js/select2.min.js') }}"></script>

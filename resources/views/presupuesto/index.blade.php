@@ -62,6 +62,6 @@
             @endforeach
             </tbody>
         </table>
-
+        {!! $presupuestos->links() !!}
     </div>
 @stop
