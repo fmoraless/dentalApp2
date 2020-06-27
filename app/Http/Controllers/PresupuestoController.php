@@ -8,6 +8,9 @@ use App\Presupuesto;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\PresupuestoResource;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+
 
 class PresupuestoController extends Controller
 {
@@ -18,8 +21,10 @@ class PresupuestoController extends Controller
      */
     public function index()
     {
-        $presupuestos = Presupuesto::all();
-        return view('presupuesto.index', compact('presupuestos'));
+        $presupuestos = Presupuesto::latest()->paginate(10);
+        return view('presupuesto.index', [
+            'presupuestos' => $presupuestos
+        ]);
 
     }
 
@@ -33,7 +38,11 @@ class PresupuestoController extends Controller
         /*$paciente = Paciente::findOrFail($id);
         $prestaciones = Prestacion::orderBy('presta_nombre', 'DESC')->pluck('presta_nombre', 'id');*/
 
-        return view('presupuesto.create');
+        $prestaciones = Prestacion::all();
+        //dd($prestaciones);
+        return view('presupuesto.create', compact('prestaciones'));
+
+//        return view('presupuesto.create');
     }
 
     /**
@@ -44,8 +53,21 @@ class PresupuestoController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
-        $presupuesto = new Presupuesto($request->except('_token'));
+        //dd($request->all());
+        $presupuesto = Presupuesto::create($request->all());
+
+        $prestaciones = $request->input('prestaciones', []);
+        $cantidades = $request->input('cantidades', []);
+        for ($prestacion=0; $prestacion < count($prestaciones); $prestacion++) {
+            if ($prestaciones[$prestacion] != '') {
+                $presupuesto->prestaciones()->attach($prestaciones[$prestacion], ['cantidad' => $cantidades[$prestacion]]);
+            }
+        }
+
+        return redirect()->route('presupuesto.index');
+
+        //dd($request->all());
+        /*$presupuesto = new Presupuesto($request->except('_token'));
         $presupuesto->presup_creador = Auth::user()->rut;
         $presupuesto->presup_expiracion = Carbon::now()->addMonth();
         $presupuesto->paciente_id = $request->paciente_id;
@@ -53,7 +75,7 @@ class PresupuestoController extends Controller
 
         $presupuesto->prestaciones()->sync($request->prestaciones);
 
-        return redirect()->route('paciente/' . $request->paciente_id);
+        return redirect()->route('presupuesto.index' . $request->paciente_id);*/
     }
 
     /**
@@ -64,8 +86,11 @@ class PresupuestoController extends Controller
      */
     public function show(Presupuesto $presupuesto)
     {
-        dd($presupuesto);
-        return view('presupuesto.show',compact('presupuesto'));
+
+        //return view('presupuesto.show',compact('presupuesto'));
+        $presupuesto->load('prestaciones');
+        //dd($presupuesto);
+        return view('presupuesto.show', compact('presupuesto'));
     }
 
     /**
