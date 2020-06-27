@@ -13,14 +13,20 @@ class Presupuesto extends Model
      */
     protected $fillable = [
         'presup_descripcion',
+        'presup_observacion',
         'presup_expiracion',
+        'presup_descuento',
         'presup_creador',
+        'user_id',
+        'abono_id',
+        'paciente_id',
+        'status',
+        'total',
     ];
 
     public function prestaciones()
     {
         return $this->belongsToMany(Prestacion::class)
-            ->using(PrestacionPresupuesto::class)
-            ->withPivot(['presta_valor', 'cantidad']);
+            ->withPivot(['cantidad']);
     }
 }
