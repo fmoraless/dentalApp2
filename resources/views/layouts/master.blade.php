@@ -18,12 +18,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @if(env('APP_ENV') == 'local')
         <script src="{{ asset('js/app.js') }}"></script>
     @else
-        <script src="{{ secure_asset('js/app.js') }}"></script>
+        <script src="{{ secure_asset('js/app.js') }}"></scrip>
     @endif
 
 <!-- Styles -->
     @if(env('APP_ENV') == 'local')
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+{{--        <link href="{{ asset('select2/css/select2.min.css') }}"></link>--}}
     @else
         <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
 @endif
@@ -217,12 +218,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 @yield('scripts')
 </body>
-<link href="{{ asset('select2/css/select2.min.css') }}"></link>
-<script src="{{ asset('select2/js/select2.min.js') }}"></script>
 <script>
     $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 </script>
 
 </html>
