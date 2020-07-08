@@ -23,12 +23,12 @@
                                     <a class="nav-link" id="vert-tabs-presupuestos-tab" data-toggle="pill"
                                        href="#vert-tabs-presupuestos" role="tab" aria-controls="vert-tabs-presupuestos"
                                        aria-selected="false">Presupuestos</a>
-                                    <a class="nav-link" id="vert-tabs-messages-tab" data-toggle="pill"
+                                    {{--<a class="nav-link" id="vert-tabs-messages-tab" data-toggle="pill"
                                        href="#vert-tabs-messages" role="tab" aria-controls="vert-tabs-messages"
                                        aria-selected="false">Messages</a>
                                     <a class="nav-link" id="vert-tabs-settings-tab" data-toggle="pill"
                                        href="#vert-tabs-settings" role="tab" aria-controls="vert-tabs-settings"
-                                       aria-selected="false">Settings</a>
+                                       aria-selected="false">Settings</a>--}}
                                 </div>
                             </div>
                             <div class="col col-sm-9">
@@ -51,7 +51,7 @@
 
 {{--                                        @include('presupuesto.list_presupuestos', $paciente)--}}
                                         @if($paciente->presupuestos->count() > 0)
-                                            <a href="{{ route('presupuesto', $paciente->id) }}"><span
+                                            <a href="{{ route('presupuesto.index') }}"><span
                                                     class="text-bold">Ver Todos los presupuestos...</span></a>
                                         @else
                                             <p class="text-muted">No hay Presupuestos aun, crea uno <i
