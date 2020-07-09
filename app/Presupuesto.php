@@ -29,12 +29,4 @@ class Presupuesto extends Model
         return $this->belongsToMany(Prestacion::class)
             ->withPivot(['cantidad']);
     }
-
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
-    
-    public function paciente(){
-        return $this->belongsTo(Paciente::class);
-    }
 }

@@ -5,13 +5,6 @@
             <i class="fas fa-comment"></i>
             Nuevo Mensaje
         </a>
-        @if (\Request::is('mensajes/*'))
-            <a class="btn bg-gradient-secondary btn-sm" title="Regresar"
-               href="{{ route('paciente.show', $paciente->id) }}">
-                <i class="fas fa-arrow-alt-circle-left"></i>
-                Atras
-            </a>
-        @endif
     </div>
     <hr>
     <div class="col pb-2">

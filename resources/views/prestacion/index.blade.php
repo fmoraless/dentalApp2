@@ -38,7 +38,7 @@
                 <tr>
                     <td>{{ $prestacion->presta_nombre }}</td>
                     <td>{{ $prestacion->presta_descripcion }}</td>
-                    <td>${{ number_format($prestacion->presta_valor, 0) }}</td>
+                    <td>{{ $prestacion->presta_valor }}</td>
                     <td>
                         <a class="btn bg-gradient-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                            title="Editar"

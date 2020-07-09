@@ -11,30 +11,22 @@
             <form action="{{ route("presupuesto.store") }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group {{ $errors->has('presup_descripcion') ? 'has-error' : '' }}">
-                    <label for="">Paciente</label>
-                    <select name="paciente_id" class="form-control" id="select-paciente">
-                        <option value="">-- choose paciente --</option>
-                            @foreach ($pacientes as $paciente)
-                                 <option value="{{ $paciente->id }}">
-                                 {{ $paciente->fullName() }} - {{ $paciente->rut }}
-                                 </option>
-                                 @endforeach
-                     </select>
-                    <!-- <input type="text" id="presup_descripcion" name="presup_descripcion" class="form-control" value="{{ old('presup_descripcion', isset($presupuesto) ? $presupuesto->presup_descripcion : '') }}" required> -->
-                    <!-- @if($errors->has('presup_descripcion'))
-                        <em class="invalid-feedback">
-                            {{ $errors->first('presup_descripcion') }}
-                        </em>
-                    @endif -->
-                    <p class="helper-block">
-                    </p>
-                </div>
-                <div class="form-group {{ $errors->has('customer_email') ? 'has-error' : '' }}">
-                    <label for="customer_email">Descripcion</label>
+                    <label for="">Cliente</label>
                     <input type="text" id="presup_descripcion" name="presup_descripcion" class="form-control" value="{{ old('presup_descripcion', isset($presupuesto) ? $presupuesto->presup_descripcion : '') }}" required>
                     @if($errors->has('presup_descripcion'))
                         <em class="invalid-feedback">
                             {{ $errors->first('presup_descripcion') }}
+                        </em>
+                    @endif
+                    <p class="helper-block">
+                    </p>
+                </div>
+                <div class="form-group {{ $errors->has('customer_email') ? 'has-error' : '' }}">
+                    <label for="customer_email">Observacion</label>
+                    <input type="text" id="presup_observacion" name="presup_observacion" class="form-control" value="{{ old('presup_observacion', isset($presupuesto) ? $presupuesto->presup_observacion : '') }}">
+                    @if($errors->has('presup_observacion'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('presup_observacion') }}
                         </em>
                     @endif
                     <p class="helper-block">
@@ -58,11 +50,11 @@
                             @foreach (old('prestaciones', ['']) as $index => $oldPrestacion)
                                 <tr id="prestacion{{ $index }}">
                                     <td>
-                                        <select name="prestaciones[]" class="form-control" id="select-prestacion">
+                                        <select name="prestaciones[]" class="form-control">
                                             <option value="">-- choose prestacion --</option>
                                             @foreach ($prestaciones as $prestacion)
                                                 <option value="{{ $prestacion->id }}"{{ $oldPrestacion == $prestacion->id ? ' selected' : '' }}>
-                                                    {{ $prestacion->presta_nombre }} (${{ number_format($prestacion->presta_valor, 0) }})
+                                                    {{ $prestacion->presta_nombre }} (${{ number_format($prestacion->presta_valor, 2) }})
                                                 </option>
                                             @endforeach
                                         </select>
@@ -96,25 +88,22 @@
 
 @section('scripts')
     <script>
-        $(document).ready(function() {
-            $('#select-paciente').select2();
-        });
-        $(document).ready(function() {
+        $(document).ready(function(){
             let row_number = {{ count(old('prestaciones', [''])) }};
-            $("#add_row").click(function (e) {
+            $("#add_row").click(function(e){
                 e.preventDefault();
                 let new_row_number = row_number - 1;
                 $('#prestacion' + row_number).html($('#prestacion' + new_row_number).html()).find('td:first-child');
                 $('#prestaciones_table').append('<tr id="prestacion' + (row_number + 1) + '"></tr>');
                 row_number++;
             });
-            $("#delete_row").click(function (e) {
+            $("#delete_row").click(function(e){
                 e.preventDefault();
-                if (row_number > 1) {
+                if(row_number > 1){
                     $("#prestacion" + (row_number - 1)).html('');
                     row_number--;
                 }
-            })
+            });
         });
     </script>
 @endsection

@@ -2,7 +2,7 @@
 @section('content')
     <div class="col-md-12">
 
-        {{--success alert al crear--}}
+        {{--        success alert al crear--}}
 
         <div class="page-header">
             <div class="form-group">
@@ -23,7 +23,7 @@
             Nuevo Paciente
         </a>
     </div>
-    <div class="col-md-12 table-responsive">
+    <div class="col-md-12">
         <table class="table table-hover table-md-responsive table-bordered">
             <thead class="thead-light">
             <tr>

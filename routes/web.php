@@ -20,11 +20,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::resource('paciente', 'PacienteController');
     Route::resource('prestacion', 'PrestacionController')->except('show');
-
-    //rutas para presupuestos
     Route::resource('presupuesto', 'PresupuestoController');
-    Route::get('presupuesto/getpdf/{presupuesto}', 'PresupuestoController@getPdf')->name('presupuesto.getpdf');
-    //Route::get('presupuesto/{paciente?}', 'PresupuestoController@index')->name('presupuesto.index');
     Route::get('selectPrestacion', 'PrestacionController@selectPrestacion')->name('seleccione.prestacion');
     Route::get('presupuesto/create/{paciente?}', 'PresupuestoController@create')->name('presupuesto.create');
 

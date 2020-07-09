@@ -7,7 +7,6 @@ use App\Prestacion;
 use App\Presupuesto;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\PresupuestoResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -21,12 +20,13 @@ class PresupuestoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-        {
-        //$paciente = Paciente::findOrFail($id);
-        $presupuestos = Presupuesto::latest()->where('presup_creador', Auth::user()->rut)->paginate(4);
-        //$presupuestos = Presupuesto::where('paciente_id', $id)->orderBy('created_at', 'desc')->paginate(3);
-        return view('presupuesto.index', compact('presupuestos'));
-    }   
+    {
+        $presupuestos = Presupuesto::latest()->paginate(10);
+        return view('presupuesto.index', [
+            'presupuestos' => $presupuestos
+        ]);
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -35,14 +35,12 @@ class PresupuestoController extends Controller
      */
     public function create()
     {
-        //$pacientes = Paciente::select(\DB::raw('CONCAT(nombres, " ", apellido_paterno, " - ", rut) AS full_name, id'))->pluck('full_name', 'id');
-        //$prestaciones = Prestacion::orderBy('presta_nombre', 'DESC')->pluck('presta_nombre', 'id');
+        /*$paciente = Paciente::findOrFail($id);
+        $prestaciones = Prestacion::orderBy('presta_nombre', 'DESC')->pluck('presta_nombre', 'id');*/
 
         $prestaciones = Prestacion::all();
-        $pacientes = Paciente::all();
-        //dd($pacientes);
         //dd($prestaciones);
-        return view('presupuesto.create', compact('prestaciones', 'pacientes'));
+        return view('presupuesto.create', compact('prestaciones'));
 
 //        return view('presupuesto.create');
     }
@@ -57,11 +55,6 @@ class PresupuestoController extends Controller
     {
         //dd($request->all());
         $presupuesto = Presupuesto::create($request->all());
-        $presupuesto->presup_creador = \auth()->user()->rut;
-        $presupuesto->user_id = \auth()->user()->id;
-        $presupuesto->presup_expiracion = new Carbon('next month');
-        $presupuesto->paciente_id = $request->paciente_id;
-        $presupuesto->save();
 
         $prestaciones = $request->input('prestaciones', []);
         $cantidades = $request->input('cantidades', []);
@@ -88,36 +81,16 @@ class PresupuestoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param \App\Presupuesto $presupuesto
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Presupuesto $presupuesto)
     {
-        $presupuesto = Presupuesto::findOrFail($id);
 
-        return view('presupuesto.show',compact('presupuesto'));
-            //$presupuesto->load('prestaciones');
+        //return view('presupuesto.show',compact('presupuesto'));
+        $presupuesto->load('prestaciones');
         //dd($presupuesto);
-        //return view('presupuesto.show', compact('presupuesto'));
-
-/*         $presupuesto = Presupuesto::findOrFail($id);
-
-        $view = view('presupuesto.show', compact('presupuesto'));
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadHTML($view)->setPaper('a4', 'portrait')->setWarnings(false);
-
-        return $pdf->stream('presupuesto_' . $presupuesto->id . '.pdf'); */
-    }
-
-    public function getPdf($id)
-    {
-        $presupuesto = Presupuesto::findOrFail($id);
-
-        $view = view('presupuesto.getpdf', compact('presupuesto'));
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadHTML($view)->setPaper('a4', 'portrait')->setWarnings(false);
-
-        return $pdf->stream('presupuesto_' . $presupuesto->id . '.pdf');
+        return view('presupuesto.show', compact('presupuesto'));
     }
 
     /**

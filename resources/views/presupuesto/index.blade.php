@@ -41,20 +41,23 @@
                 <tr>
                     <td>
                         <a href="{{ route('presupuesto.show', $presupuesto->id) }}">{{ $presupuesto->id }}</a>
+
                     </td>
                     <td>{{ $presupuesto->status }}</td>
                     <td>{{ $presupuesto->created_at }}</td>
                     <td>{{ $presupuesto->total }}</td>
+                    <td>{{ $presupuesto->fecha_expiracion }}</td>
+
                     <td>
                         <a class="btn bg-gradient-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                            title="Editar"
                            href="{{ route('presupuesto.edit', $presupuesto->id) }}"><i class="fas fa-pen"></i>
                         </a>
                         <a class="btn bg-gradient-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                           title="Pdf"
-                           href="{{ route('presupuesto.getpdf', $presupuesto->id) }}" target="_blank">"<i class="fas fa-bars"></i>
+                           title="Detalle"
+                           href="{{ route('presupuesto.edit', $presupuesto->id) }}">"<i class="fas fa-bars"></i>
                         </a>
-                    </>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

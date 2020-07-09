@@ -1,47 +1,94 @@
-    @extends('layouts.master')
-    @section('content')    
+@extends('layouts.master')
+
+@section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-sm-2 text-center">
-              @if(env('APP_ENV') == 'local')
-               <img src="{{ asset('images/licandent_logo.jpg') }}" class="brand-image img-circle elevation-3" style="opacity: .8; width: 120px">
-              @else
-               <img src="{{ secure_asset('images/licandent_logo.jpg') }}"  class="brand-image img-circle elevation-3" style="opacity: .8">
-              @endif
-              <h6 class="font-weight-bold pt-3">{{ Config::get('app.name') }}</h6>
-            </div>
-                      
-            </div>
-                <div class="row">
-            <div class="col text-center">
-                <h5 class="font-weight-bold">Presupuesto Nº {{ $presupuesto->id }}</h5>
-                <div>
-                    <h6 class="text-uppercase font-weight-bold">{{ $presupuesto->paciente->fullName() }}</h6>
-                    
-                    
-                    <table class="table table-striped table-bordered pb-3">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Prestacion</th>
-      <th scope="col">Descripcion</th>
-      <th scope="col">Valor</th>
-    </tr>
-  </thead>
-  <tbody>
-  @foreach($presupuesto->prestaciones as $prestacion)
-    <tr>
-    <td>{{ $prestacion->id }}</td>
-      <td>{{ $prestacion->presta_nombre }}</td>
-      <td>{{ $prestacion->presta_descripcion }}</td>
-      <td>${{ number_format($prestacion->presta_valor, 0) }}</td>
-    </tr>
-    @endforeach
-  </tbody>
-</table>
-</div>
-        <p>Profesional responsable: </p><p class="text-muted font-weight-bold">{{ \auth()->user()->fullName() }}</p>            
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-users-cog"></i>
+                            Presupuesto
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <h4>{{ $presupuesto->id }}</h4>
+                        <div class="row">
+                            <div class="col-5 col-sm-3">
+                                <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist"
+                                     aria-orientation="vertical">
+                                    <a class="nav-link active" id="vert-tabs-mensajes-tab" data-toggle="pill"
+                                       href="#vert-tabs-mensajes" role="tab" aria-controls="vert-tabs-mensajes"
+                                       aria-selected="true">Ultimo Mensaje</a>
+                                    <a class="nav-link" id="vert-tabs-presupuestos-tab" data-toggle="pill"
+                                       href="#vert-tabs-presupuestos" role="tab" aria-controls="vert-tabs-presupuestos"
+                                       aria-selected="false">Presupuestos</a>
+                                    <a class="nav-link" id="vert-tabs-messages-tab" data-toggle="pill"
+                                       href="#vert-tabs-messages" role="tab" aria-controls="vert-tabs-messages"
+                                       aria-selected="false">Messages</a>
+                                    <a class="nav-link" id="vert-tabs-settings-tab" data-toggle="pill"
+                                       href="#vert-tabs-settings" role="tab" aria-controls="vert-tabs-settings"
+                                       aria-selected="false">Settings</a>
+                                </div>
+                            </div>
+                            <div class="col col-sm-9">
+                                <div class="tab-content" id="vert-tabs-tabContent">
+                                    <div class="tab-pane text-left fade show active" id="vert-tabs-mensajes"
+                                         role="tabpanel"
+                                         aria-labelledby="vert-tabs-mensajes-tab">
+
+{{--                                        @include('mensaje.list_mensajes', $presupuesto)--}}
+                                        {{--@if($presupuesto->mensajes->count() > 0)
+                                            <a href="{{ route('mensajes', $presupuesto->id) }}"><span
+                                                    class="text-bold">Ver Todos los mensajes...</span></a>
+                                        @else
+                                            <p class="text-muted">No hay Mensajes aun, crea uno <i
+                                                    class="far fa-laugh-wink fa-2x"></i></p>
+                                        @endif--}}
+                                    </div>
+                                    <div class="tab-pane fade" id="vert-tabs-presupuestos" role="tabpanel"
+                                         aria-labelledby="vert-tabs-presupuestos-tab">
+
+                                        {{--@include('presupuesto.list_presupuestos', $presupuesto)
+                                        @if($presupuesto->presupuestos->count() > 0)
+                                            <a href="{{ route('presupuesto', $presupuesto->id) }}"><span
+                                                    class="text-bold">Ver Todos los presupuestos...</span></a>
+                                        @else
+                                            <p class="text-muted">No hay Presupuestos aun, crea uno <i
+                                                    class="far fa-smile-beam fa-2x"></i></p>
+                                        @endif--}}
+                                    </div>
+                                    <div class="tab-pane fade" id="vert-tabs-messages" role="tabpanel"
+                                         aria-labelledby="vert-tabs-messages-tab">
+                                        Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris.
+                                        Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu
+                                        massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla.
+                                        Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit
+                                        condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis
+                                        velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum
+                                        odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla
+                                        lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id
+                                        fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt
+                                        eleifend ac ornare magna.
+                                    </div>
+                                    <div class="tab-pane fade" id="vert-tabs-settings" role="tabpanel"
+                                         aria-labelledby="vert-tabs-settings-tab">
+                                        Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna,
+                                        iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit
+                                        dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie
+                                        tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec
+                                        interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget
+                                        aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo
+                                        dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan
+                                        ex sit amet facilisis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
     </div>
-    @stop
+    </div>
+@endsection
