@@ -13,7 +13,7 @@
                 <div class="form-group {{ $errors->has('presup_descripcion') ? 'has-error' : '' }}">
                     <label for="">Paciente</label>
                     <select name="paciente_id" class="form-control" id="select-paciente">
-                        <option value="">-- choose paciente --</option>
+                        <option value=""> -- seleccione paciente -- </option>
                             @foreach ($pacientes as $paciente)
                                  <option value="{{ $paciente->id }}">
                                  {{ $paciente->fullName() }} - {{ $paciente->rut }}
@@ -51,7 +51,8 @@
                             <thead>
                             <tr>
                                 <th>Prestacion</th>
-                                <th>Cantidad</th>
+                                <th>Pieza dental</th>
+                                <th>Valor</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -62,20 +63,19 @@
                                             <option value="">-- choose prestacion --</option>
                                             @foreach ($prestaciones as $prestacion)
                                                 <option value="{{ $prestacion->id }}"{{ $oldPrestacion == $prestacion->id ? ' selected' : '' }}>
-                                                    {{ $prestacion->presta_nombre }} (${{ number_format($prestacion->presta_valor, 0) }})
+                                                    {{ $prestacion->presta_nombre }} - ${{ number_format($prestacion->presta_valor, 0) }}
                                                 </option>
-                                            @endforeach
+                                                @endforeach
                                         </select>
                                     </td>
+                                    @endforeach
                                     <td>
-                                        <input type="number" name="cantidades[]" class="form-control" value="{{ old('cantidades.' . $index) ?? '1' }}" />
+                                    <input type="number" name="piezas[]" class="form-control" step="any" value="{{ old('piezas.' . $index) ?? '' }}" />
                                     </td>
                                 </tr>
-                            @endforeach
                             <tr id="prestacion{{ count(old('prestaciones', [''])) }}"></tr>
                             </tbody>
                         </table>
-
                         <div class="row">
                             <div class="col-md-12">
                                 <button id="add_row" class="btn btn-default pull-left">+ Add Row</button>
@@ -97,25 +97,26 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('#select-paciente').select2();
+            $('#select-paciente').select2({
+                theme: "classic"
+            });
         });
         $(document).ready(function() {
-            let row_number = {{ count(old('prestaciones', [''])) }};
-            $("#add_row").click(function (e) {
+                let row_number = {{ count(old('prestaciones', [''])) }};
+            $('#add_row').click(function (e) {
                 e.preventDefault();
                 let new_row_number = row_number - 1;
                 $('#prestacion' + row_number).html($('#prestacion' + new_row_number).html()).find('td:first-child');
                 $('#prestaciones_table').append('<tr id="prestacion' + (row_number + 1) + '"></tr>');
                 row_number++;
             });
-            $("#delete_row").click(function (e) {
+            $('#delete_row').click(function (e) {
                 e.preventDefault();
                 if (row_number > 1) {
-                    $("#prestacion" + (row_number - 1)).html('');
+                    $('#prestacion' + (row_number - 1)).html('');
                     row_number--;
-                }
+            }
             })
-        });
+        })
     </script>
-@endsection
-
+@stop

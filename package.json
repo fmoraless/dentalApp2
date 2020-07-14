@@ -26,6 +26,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.12.1",
         "admin-lte": "^3.0.2",
+        "chosen-js": "^1.8.7",
         "select2": "^4.0.13",
         "vuetify": "^2.2.15"
     }

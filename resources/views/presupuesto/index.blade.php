@@ -52,7 +52,7 @@
                         </a>
                         <a class="btn bg-gradient-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                            title="Pdf"
-                           href="{{ route('presupuesto.getpdf', $presupuesto->id) }}" target="_blank">"<i class="fas fa-bars"></i>
+                           href="{{ route('presupuesto.getpdf', $presupuesto->id) }}" target="_blank"><i class="fa fa-file-pdf" aria-hidden="true"></i>
                         </a>
                     </>
                 </tr>

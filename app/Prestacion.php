@@ -19,4 +19,9 @@ class Prestacion extends Model
             return $query->where('presta_nombre', 'LIKE', "%$q%")
                 ->orWhere('presta_descripcion', 'LIKE', "%$q%");
     }
+
+    /*public function pieza()
+    {
+        return $this->hasOne(Pieza::class);
+    }*/
 }

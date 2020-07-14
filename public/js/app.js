@@ -57262,11 +57262,11 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\dental-app\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\xampp\htdocs\dental-app\resources\js\fontawesome.min.js */"./resources/js/fontawesome.min.js");
-__webpack_require__(/*! C:\xampp\htdocs\dental-app\resources\js\adminlte.min.js */"./resources/js/adminlte.min.js");
-__webpack_require__(/*! C:\xampp\htdocs\dental-app\node_modules\select2\dist\js\select2.full.js */"./node_modules/select2/dist/js/select2.full.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\dental-app\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\dental-app\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\laragon\www\dental-app\resources\js\fontawesome.min.js */"./resources/js/fontawesome.min.js");
+__webpack_require__(/*! C:\laragon\www\dental-app\resources\js\adminlte.min.js */"./resources/js/adminlte.min.js");
+__webpack_require__(/*! C:\laragon\www\dental-app\node_modules\select2\dist\js\select2.full.js */"./node_modules/select2/dist/js/select2.full.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\dental-app\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

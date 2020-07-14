@@ -27,13 +27,13 @@ class Presupuesto extends Model
     public function prestaciones()
     {
         return $this->belongsToMany(Prestacion::class)
-            ->withPivot(['cantidad']);
+            ->withPivot(['pieza']);
     }
 
     public function user(){
         return $this->belongsTo(User::class);
     }
-    
+
     public function paciente(){
         return $this->belongsTo(Paciente::class);
     }

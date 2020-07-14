@@ -26,7 +26,7 @@ class PresupuestoController extends Controller
         $presupuestos = Presupuesto::latest()->where('presup_creador', Auth::user()->rut)->paginate(4);
         //$presupuestos = Presupuesto::where('paciente_id', $id)->orderBy('created_at', 'desc')->paginate(3);
         return view('presupuesto.index', compact('presupuestos'));
-    }   
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,6 +40,7 @@ class PresupuestoController extends Controller
 
         $prestaciones = Prestacion::all();
         $pacientes = Paciente::all();
+        //$piezas = Pieza::all();
         //dd($pacientes);
         //dd($prestaciones);
         return view('presupuesto.create', compact('prestaciones', 'pacientes'));
@@ -60,14 +61,18 @@ class PresupuestoController extends Controller
         $presupuesto->presup_creador = \auth()->user()->rut;
         $presupuesto->user_id = \auth()->user()->id;
         $presupuesto->presup_expiracion = new Carbon('next month');
-        $presupuesto->paciente_id = $request->paciente_id;
+        $presupuesto->paciente_id = $request->paciente_id;  
         $presupuesto->save();
 
-        $prestaciones = $request->input('prestaciones', []);
-        $cantidades = $request->input('cantidades', []);
+        $prestaciones = $request->input('prestaciones', ['']);
+        dd($prestaciones);
+        //$suma = Prestacion::where('id', $request->input('prestaciones', []))->sum('presta_valor');
+        //dd($suma);
+        //$cantidades = $request->input('cantidades', []);
+        $piezas = $request->input('piezas', []);
         for ($prestacion=0; $prestacion < count($prestaciones); $prestacion++) {
             if ($prestaciones[$prestacion] != '') {
-                $presupuesto->prestaciones()->attach($prestaciones[$prestacion], ['cantidad' => $cantidades[$prestacion]]);
+                $presupuesto->prestaciones()->attach($prestaciones[$prestacion], ['pieza' => $piezas[$prestacion]]);
             }
         }
 
@@ -111,7 +116,8 @@ class PresupuestoController extends Controller
 
     public function getPdf($id)
     {
-        $presupuesto = Presupuesto::findOrFail($id);
+        $presupuesto = Presupuesto::with('prestaciones')->findOrFail($id);
+        //dd($presupuesto->prestaciones);
 
         $view = view('presupuesto.getpdf', compact('presupuesto'));
         $pdf = App::make('dompdf.wrapper');
